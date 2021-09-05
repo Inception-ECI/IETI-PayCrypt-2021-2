@@ -1,18 +1,8 @@
-package com.inception.paycrypt.model;
-
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.inception.paycrypt.dto;
 
 import java.util.Date;
 
-@Document
-@NoArgsConstructor
-public class Currency {
-
-    @Id
-    private String id;
-
+public class CurrencyDto {
     private String name;
 
     private String currencyCode;
@@ -23,48 +13,40 @@ public class Currency {
 
     private Date modificationDate;
 
-    public String getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public Date getModificationDate() {
-        return modificationDate;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
     public void setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+    }
+
+    public String getLogo() {
+        return logo;
     }
 
     public void setLogo(String logo) {
         this.logo = logo;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Date getModificationDate() {
+        return modificationDate;
     }
 
     public void setModificationDate(Date modificationDate) {
