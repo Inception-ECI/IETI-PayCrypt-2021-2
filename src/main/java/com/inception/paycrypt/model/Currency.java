@@ -1,5 +1,6 @@
 package com.inception.paycrypt.model;
 
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,7 +16,7 @@ public class Currency {
 
     private String name;
 
-    private String currencyCode;
+    private CurrencyCode currencyCode;
 
     private String logo;
 
@@ -31,7 +32,7 @@ public class Currency {
         return name;
     }
 
-    public String getCurrencyCode() {
+    public CurrencyCode getCurrencyCode() {
         return currencyCode;
     }
 
@@ -55,7 +56,7 @@ public class Currency {
         this.name = name;
     }
 
-    public void setCurrencyCode(String currencyCode) {
+    public void setCurrencyCode(CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
     }
 

@@ -1,11 +1,13 @@
 package com.inception.paycrypt.dto;
 
+import com.inception.paycrypt.utils.CurrencyCode;
+
 import java.util.Date;
 
 public class CurrencyDto {
     private String name;
 
-    private String currencyCode;
+    private CurrencyCode currencyCode;
 
     private String logo;
 
@@ -21,11 +23,11 @@ public class CurrencyDto {
         this.name = name;
     }
 
-    public String getCurrencyCode() {
+    public CurrencyCode getCurrencyCode() {
         return currencyCode;
     }
 
-    public void setCurrencyCode(String currencyCode) {
+    public void setCurrencyCode(CurrencyCode currencyCode) {
         this.currencyCode = currencyCode;
     }
 
