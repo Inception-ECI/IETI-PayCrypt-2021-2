@@ -1,5 +1,6 @@
 package com.inception.paycrypt.model;
 
+import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -48,27 +49,18 @@ public class Currency {
         return modificationDate;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void UpdateCurrency(CurrencyDto currencyDto) {
+        this.currencyCode = currencyDto.getCurrencyCode();
+        this.name = currencyDto.getName();
+        this.logo = currencyDto.getLogo();
+        this.modificationDate = new Date();
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCurrencyCode(CurrencyCode currencyCode) {
-        this.currencyCode = currencyCode;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public void setModificationDate(Date modificationDate) {
-        this.modificationDate = modificationDate;
+    public void creationCurrency(CurrencyDto currencyDto){
+        this.currencyCode = currencyDto.getCurrencyCode();
+        this.name = currencyDto.getName();
+        this.logo = currencyDto.getLogo();
+        this.creationDate = new Date();
+        this.modificationDate = new Date();
     }
 }
