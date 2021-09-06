@@ -1,7 +1,13 @@
 package com.inception.paycrypt.utils;
 
 import lombok.RequiredArgsConstructor;
-
+/**
+ * Enum class for Currency Code
+ *
+ * @author Juan Ramos
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @RequiredArgsConstructor
 public enum CurrencyCode {
 

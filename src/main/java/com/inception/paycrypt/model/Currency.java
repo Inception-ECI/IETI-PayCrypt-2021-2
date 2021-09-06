@@ -7,7 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-
+/**
+ * Currency class - used as Document for MongoDB
+ *
+ * @author Juan Ramos
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Document
 @NoArgsConstructor
 public class Currency {
@@ -49,6 +55,10 @@ public class Currency {
         return modificationDate;
     }
 
+    /**
+     * Constructor used for mapping information
+     * @param currencyDto the CurrencyDto to be mapped
+     */
     public void UpdateCurrency(CurrencyDto currencyDto) {
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();
@@ -56,6 +66,10 @@ public class Currency {
         this.modificationDate = new Date();
     }
 
+    /**
+     * Method to update information
+     * @param currencyDto class with new information
+     */
     public void creationCurrency(CurrencyDto currencyDto){
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();

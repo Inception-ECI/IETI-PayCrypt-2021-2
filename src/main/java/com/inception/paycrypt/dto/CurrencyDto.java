@@ -3,7 +3,13 @@ package com.inception.paycrypt.dto;
 import com.inception.paycrypt.utils.CurrencyCode;
 
 import java.util.Date;
-
+/**
+ *  Mapping class for the Currency class
+ *
+ * @author Juan Ramos
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class CurrencyDto {
     private String name;
 
