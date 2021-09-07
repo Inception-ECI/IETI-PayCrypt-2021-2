@@ -25,5 +25,5 @@ public class CurrencyDto {
     private Date creationDate;
 
     private Date modificationDate;
-    
+
 }
