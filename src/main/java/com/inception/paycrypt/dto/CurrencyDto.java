@@ -3,6 +3,7 @@ package com.inception.paycrypt.dto;
 import com.inception.paycrypt.utils.CurrencyCode;
 
 import java.util.Date;
+
 /**
  *  Mapping class for the Currency class
  *
