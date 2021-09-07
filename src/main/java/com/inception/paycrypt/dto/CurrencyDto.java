@@ -16,14 +16,30 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class CurrencyDto {
+
+    /**
+     * The currency name
+     */
     private String name;
 
+    /**
+     * The currency code
+     */
     private CurrencyCode currencyCode;
 
+    /**
+     * The currency logo
+     */
     private String logo;
 
+    /**
+     * The currency creation date
+     */
     private Date creationDate;
 
+    /**
+     * The currency modification date
+     */
     private Date modificationDate;
 
 }
