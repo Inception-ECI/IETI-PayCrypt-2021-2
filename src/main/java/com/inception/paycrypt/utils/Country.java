@@ -22,7 +22,7 @@ public enum Country {
 	/**
 	 * Brasil Country.
 	 */
-	BR("BRASIL", "BR"),
+	BR("BRAZIL", "BR"),
 
 	/**
 	 * Canada Country.
@@ -42,22 +42,22 @@ public enum Country {
 	/**
 	 * France Country.
 	 */
-	FR("FRANCIA", "FR"),
+	FR("FRANCE", "FR"),
 
 	/**
 	 * Mexico Country.
 	 */
-	MX("MÉXICO", "MX"),
+	MX("MEXICO", "MX"),
 
 	/**
 	 * Peru Country.
 	 */
-	PE("PERÚ", "PE"),
+	PE("PERU", "PE"),
 
 	/**
 	 * Spain Country.
 	 */
-	ES("ESPAÑA", "ES"),
+	ES("SPAIN", "ES"),
 
 	/**
 	 * United States Country
