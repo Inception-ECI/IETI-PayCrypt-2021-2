@@ -21,17 +21,35 @@ import java.util.Date;
 @NoArgsConstructor
 public class Currency {
 
+    /**
+     * The currency Id
+     */
     @Id
     private String id;
 
+    /**
+     * The currency name
+     */
     private String name;
 
+    /**
+     *  The currency code
+     */
     private CurrencyCode currencyCode;
 
+    /**
+     * The currency logo
+     */
     private String logo;
 
+    /**
+     * The currency creation date
+     */
     private Date creationDate;
 
+    /**
+     * The currency modification date
+     */
     private Date modificationDate;
 
     /**
