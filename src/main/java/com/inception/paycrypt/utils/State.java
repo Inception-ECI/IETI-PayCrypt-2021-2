@@ -17,7 +17,7 @@ public enum State {
 	/**
 	 * State when the account is active
 	 */
-	ACTIVE("The Account is Activated"),
+	ACTIVE("The Account is Active"),
 
 	/**
 	 * State when the account is disabled
