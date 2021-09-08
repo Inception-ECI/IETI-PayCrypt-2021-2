@@ -25,32 +25,32 @@ public class PaymentMethod{
      * The PaymentMethod identifier
      */
     @Id
-    private String Id;
+    private String id;
 
     /**
      * The Source Currency identifier
      */
-    private String SourceCurrency_id;
+    private String sourceCurrency_id;
 
     /**
      * The Target Currency identifier
      */
-    private String TargetCurrency_id;
+    private String targetCurrency_id;
 
     /**
-     * The amount of money of the transaction to be made
+     * Percentage of money we are going to charge per transaction made
      */
-    private BigInteger Fee;
+    private int fee;
 
     /**
      * The Payment Method creation date
      */
-    private Date CreationDate;
+    private Date creationDate;
 
     /**
      * The Payment Method Modification date
      */
-    private Date ModificationDate;
+    private Date modificationDate;
 
     /**
      * Constructor used to map a PaymentMethodDTO to a PaymentMethod class
@@ -58,11 +58,11 @@ public class PaymentMethod{
      * @param PaymentMethodDTO The {@link PaymentMethodDTO} to be mapped
      */
     public PaymentMethod(PaymentMethodDTO PaymentMethodDTO){
-        this.SourceCurrency_id=PaymentMethodDTO.getSourceCurrency_id();
-        this.TargetCurrency_id=PaymentMethodDTO.getTargetCurrency_id();
-        this.Fee=PaymentMethodDTO.getFee();
-        this.CreationDate=PaymentMethodDTO.getCreationDate();
-        this.ModificationDate=PaymentMethodDTO.getModificationDate();
+        this.sourceCurrency_id=PaymentMethodDTO.getSourceCurrency_id();
+        this.targetCurrency_id=PaymentMethodDTO.getTargetCurrency_id();
+        this.fee=PaymentMethodDTO.getFee();
+        this.creationDate=PaymentMethodDTO.getCreationDate();
+        this.modificationDate=PaymentMethodDTO.getModificationDate();
 
     }
 }

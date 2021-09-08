@@ -19,26 +19,26 @@ public class PaymentMethodDTO {
     /**
      * The Source Currency identifier
      */
-    private String SourceCurrency_id;
+    private String sourceCurrency_id;
 
     /**
      * The Target Currency identifier
      */
-    private String TargetCurrency_id;
+    private String targetCurrency_id;
 
     /**
-     * The amount of money of the transaction to be made
+     * Percentage of money we are going to charge per transaction made
      */
-    private BigInteger Fee;
+    private int fee;
 
     /**
      * The Payment Method creation date
      */
-    private Date CreationDate;
+    private Date creationDate;
 
     /**
      * The Payment Method Modification date
      */
-    private Date ModificationDate;
+    private Date modificationDate;
 
 }
