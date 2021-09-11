@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 /**
  * This enum contains the Available document types for the server
  *
- * @author Andres Calderon (andres.calderon@escuelaing.edu.co)
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */

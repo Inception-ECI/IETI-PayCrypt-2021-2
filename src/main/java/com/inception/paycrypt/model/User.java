@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 /**
  * User class - That is used as Document for MongoDB
  *
- * @author Andres Calderon (andres.calderon@escuelaing.edu.co)
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */

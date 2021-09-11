@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 /**
  * MongoDB User Repository
  *
- * @author Andres Calderon (andres.calderon@escuelaing.edu.co)
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */

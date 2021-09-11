@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * Mapping class for the User class
  *
- * @author Andres Calderon (andres.calderon@escuelaing.edu.co)
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
