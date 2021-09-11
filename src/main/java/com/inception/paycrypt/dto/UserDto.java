@@ -2,14 +2,14 @@ package com.inception.paycrypt.dto;
 
 import com.inception.paycrypt.utils.Country;
 import com.inception.paycrypt.utils.DocumentType;
-import com.inception.paycrypt.utils.State;
+import com.inception.paycrypt.utils.UserState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
  * Mapping class for the User class
  *
- * @author Andres Calderon (andres.calderon@escuelaing.edu.co)
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
@@ -40,7 +40,7 @@ public class UserDto {
 	/**
 	 * The user state
 	 */
-	private State state;
+	private UserState userState;
 
 	/**
 	 * The user phone
