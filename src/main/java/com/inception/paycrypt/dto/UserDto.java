@@ -2,7 +2,7 @@ package com.inception.paycrypt.dto;
 
 import com.inception.paycrypt.utils.Country;
 import com.inception.paycrypt.utils.DocumentType;
-import com.inception.paycrypt.utils.State;
+import com.inception.paycrypt.utils.UserState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,7 +40,7 @@ public class UserDto {
 	/**
 	 * The user state
 	 */
-	private State state;
+	private UserState userState;
 
 	/**
 	 * The user phone
