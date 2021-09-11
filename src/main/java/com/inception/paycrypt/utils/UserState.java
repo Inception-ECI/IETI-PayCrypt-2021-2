@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum State {
+public enum UserState {
 
 	/**
 	 * State when the account is active
