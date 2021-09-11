@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 public class AccountDto {
-    
+
     /**
      * The user id
      */
@@ -27,14 +27,14 @@ public class AccountDto {
     private String currency_id;
 
     /**
-     * the balance of the account
+     * The balance of the account
      */
     private String balance;
 
     /**
-     * the account state
+     * The account state
      */
-    private String State;
+    private String state;
 
     /**
      * The account creation date
