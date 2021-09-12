@@ -33,9 +33,14 @@ public class UserDto {
 	private String email;
 
 	/**
-	 * The user password hashed
+	 * The user current password hashed
 	 */
 	private String password;
+
+	/**
+	 * The user possible new password hashed
+	 */
+	private String newPassword;
 
 	/**
 	 * The user state
