@@ -14,6 +14,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface UserRepository extends MongoRepository<User, String> {
 
+	/**
+	 * Method to find a user by his email
+	 *
+	 * @param email The User email
+	 * @return The Optional for the User
+	 */
 	Optional<User> findByEmail(String email);
 
 }
