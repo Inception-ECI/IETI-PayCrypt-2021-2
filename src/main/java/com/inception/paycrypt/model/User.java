@@ -128,4 +128,15 @@ public class User {
 		return canChangePassword;
 	}
 
+	/**
+	 * Update the user State
+	 *
+	 * @param userState The new User state
+	 */
+	public void updateState(final UserState userState) {
+
+		this.userState = userState;
+		this.modificationDate = new Date();
+	}
+
 }
