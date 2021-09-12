@@ -7,6 +7,7 @@ import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.User;
 import com.inception.paycrypt.repository.UserRepository;
 import com.inception.paycrypt.service.UserService;
+import com.inception.paycrypt.utils.UserState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -89,6 +90,24 @@ public class UserServiceMongoDB implements UserService {
 			}
 
 			throw new UserServiceException(UserServiceException.PASSWORD_DONT_MATCH);
+		}
+
+		throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public User updateState(final String id, final UserState userState) {
+
+		Optional<User> optionalUser = userRepository.findById(id);
+
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+			user.updateState(userState);
+
+			return user;
 		}
 
 		throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
