@@ -2,6 +2,7 @@ package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.UserDto;
 import com.inception.paycrypt.model.User;
+import com.inception.paycrypt.utils.UserState;
 import org.springframework.stereotype.Service;
 
 /**
@@ -40,11 +41,21 @@ public interface UserService {
 	User updateUserInfo(final UserDto userDto, final String id);
 
 	/**
+	 * Update the User Password
+	 *
 	 * @param id          The id of the {@link User} to be Updated
 	 * @param newPassword The new password to be set to the user
 	 * @param oldPassword The old password of the user
 	 * @return The {@link User} that has been Updated
 	 */
 	User updatePassword(final String id, final String newPassword, final String oldPassword);
+
+	/**
+	 * Update the user state
+	 *
+	 * @param userState The new user state
+	 * @return The {@link User} that has been Updated
+	 */
+	User updateState(final String id, final UserState userState);
 
 }
