@@ -97,6 +97,7 @@ public class User {
 		this.documentNumber = userDto.getDocumentNumber();
 		this.email = userDto.getEmail();
 		this.password = userDto.getPassword();
+		this.userState = userDto.getUserState();
 		this.phone = userDto.getPhone();
 		this.country = userDto.getCountry();
 		this.name = userDto.getName();
@@ -117,6 +118,8 @@ public class User {
 		this.email = userDto.getEmail();
 		this.phone = userDto.getPhone();
 		this.country = userDto.getCountry();
+		this.name = userDto.getName();
+		this.lastName = userDto.getLastName();
 		this.modificationDate = new Date();
 	}
 
