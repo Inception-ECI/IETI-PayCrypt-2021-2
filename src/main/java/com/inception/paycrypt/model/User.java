@@ -67,6 +67,16 @@ public class User {
 	private Country country;
 
 	/**
+	 * The user name
+	 */
+	private String name;
+
+	/**
+	 * The user lastname
+	 */
+	private String lastName;
+
+	/**
 	 * The user creation date
 	 */
 	private Date creationDate;
@@ -89,6 +99,8 @@ public class User {
 		this.password = userDto.getPassword();
 		this.phone = userDto.getPhone();
 		this.country = userDto.getCountry();
+		this.name = userDto.getName();
+		this.lastName = userDto.getLastName();
 		this.creationDate = new Date();
 		this.modificationDate = new Date();
 	}
