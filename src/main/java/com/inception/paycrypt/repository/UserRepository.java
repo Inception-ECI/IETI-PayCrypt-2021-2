@@ -1,5 +1,7 @@
 package com.inception.paycrypt.repository;
 
+import java.util.Optional;
+
 import com.inception.paycrypt.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -11,5 +13,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @since 1.0.0
  */
 public interface UserRepository extends MongoRepository<User, String> {
+
+	Optional<User> findByEmail(String email);
 
 }
