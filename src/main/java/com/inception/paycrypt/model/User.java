@@ -121,6 +121,7 @@ public class User {
 
 		if (this.password.equals(oldPassword)) {
 			this.password = newPassword;
+			this.modificationDate = new Date();
 			canChangePassword = true;
 		}
 
