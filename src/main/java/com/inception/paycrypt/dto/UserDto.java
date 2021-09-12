@@ -57,4 +57,14 @@ public class UserDto {
 	 */
 	private Country country;
 
+	/**
+	 * The user name
+	 */
+	private String name;
+
+	/**
+	 * The user lastname
+	 */
+	private String lastName;
+
 }
