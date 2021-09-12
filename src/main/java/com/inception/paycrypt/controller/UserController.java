@@ -68,4 +68,17 @@ public class UserController {
 		return ResponseEntity.ok(userService.updatePassword(id, userDto.getNewPassword(), userDto.getPassword()));
 	}
 
+	/**
+	 * Put update endpoint for states changes
+	 *
+	 * @param userDto The {@link UserDto} to be updated
+	 * @param id      The {@link User} id to be updated
+	 * @return The {@link User} after being updated
+	 */
+	@PutMapping("/state/{id}")
+	public ResponseEntity<User> updateState(@RequestBody UserDto userDto, @PathVariable String id) {
+
+		return ResponseEntity.ok(userService.updateState(id, userDto.getUserState()));
+	}
+
 }
