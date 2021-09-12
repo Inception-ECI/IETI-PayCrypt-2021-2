@@ -20,6 +20,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @NoArgsConstructor
 public class Account {
+
     /**
      * The Account id
      */
@@ -29,12 +30,12 @@ public class Account {
     /**
      * The user id
      */
-    private String user_id;
+    private String userId;
 
     /**
      * The currency Id
      */
-    private String currency_id;
+    private String currencyId;
 
     /**
      * the balance of the account
@@ -61,8 +62,8 @@ public class Account {
      * @param accountDto The {@link AccountDto} to be mapped
      */
     public void creationAccount(AccountDto accountDto){
-        this.user_id = accountDto.getUser_id();
-        this.currency_id = accountDto.getCurrency_id();
+        this.userId = accountDto.getUserId();
+        this.currencyId = accountDto.getCurrencyId();
         this.balance = accountDto.getBalance();
         this.creationDate = new Date();
         this.modificationDate = new Date();

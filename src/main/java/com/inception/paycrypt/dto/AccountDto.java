@@ -19,12 +19,12 @@ public class AccountDto {
     /**
      * The user id
      */
-    private String user_id;
+    private String userId;
 
     /**
      * The currency Id
      */
-    private String currency_id;
+    private String currencyId;
 
     /**
      * The balance of the account
