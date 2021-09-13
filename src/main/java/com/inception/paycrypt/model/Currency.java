@@ -2,6 +2,8 @@ package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.utils.CurrencyCode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -16,9 +18,11 @@ import java.util.Date;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Document
 @Getter
+@Builder
+@Document
 @NoArgsConstructor
+@AllArgsConstructor
 public class Currency {
 
     /**
