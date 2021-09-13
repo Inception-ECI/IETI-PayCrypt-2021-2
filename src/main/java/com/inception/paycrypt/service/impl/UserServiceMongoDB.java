@@ -106,6 +106,7 @@ public class UserServiceMongoDB implements UserService {
 		if (optionalUser.isPresent()) {
 			User user = optionalUser.get();
 			user.updateState(userState);
+			userRepository.save(user);
 
 			return user;
 		}
