@@ -56,7 +56,7 @@ public class Currency {
      * Constructor used for mapping information
      * @param currencyDto the CurrencyDto to be mapped
      */
-    public void UpdateCurrency(CurrencyDto currencyDto) {
+    public void updateCurrency(CurrencyDto currencyDto) {
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();
         this.logo = currencyDto.getLogo();
@@ -64,10 +64,11 @@ public class Currency {
     }
 
     /**
-     * Method to update information
+     * Constructor of Currency using a CurrencyDto
      * @param currencyDto class with new information
      */
-    public void creationCurrency(CurrencyDto currencyDto){
+    public Currency(CurrencyDto currencyDto){
+
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();
         this.logo = currencyDto.getLogo();
