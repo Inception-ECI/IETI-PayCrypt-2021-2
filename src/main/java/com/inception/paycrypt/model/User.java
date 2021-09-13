@@ -6,6 +6,8 @@ import com.inception.paycrypt.dto.UserDto;
 import com.inception.paycrypt.utils.Country;
 import com.inception.paycrypt.utils.DocumentType;
 import com.inception.paycrypt.utils.UserState;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -16,11 +18,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * User class - That is used as Document for MongoDB
  *
  * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
- * @version 1.0.0
+ * @version 1.1.0
  * @since 1.0.0
  */
+@Builder
 @Getter
 @Document
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
