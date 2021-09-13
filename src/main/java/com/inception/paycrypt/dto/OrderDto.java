@@ -1,5 +1,6 @@
 package com.inception.paycrypt.dto;
 
+import com.inception.paycrypt.utils.PaymentMethod;
 import com.inception.paycrypt.utils.SourceCurrency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

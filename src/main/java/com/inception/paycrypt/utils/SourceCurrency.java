@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
  * @version 1.0.0
  * @since 1.0.0
  */
+
 @Getter
 @RequiredArgsConstructor
-
 public enum SourceCurrency {
 
     /**
@@ -60,7 +60,6 @@ public enum SourceCurrency {
      * Colombian pesos
      */
     COP("COLOMBIAN PESOS", "COP");
-
 
     /**
      * The Currency Name
