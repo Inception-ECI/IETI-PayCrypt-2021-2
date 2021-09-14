@@ -21,5 +21,4 @@ public class RequestConversionDto {
 
     private double sourceValue;
 
-    private double targetValue;
 }
