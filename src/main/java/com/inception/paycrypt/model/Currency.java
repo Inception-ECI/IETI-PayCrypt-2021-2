@@ -2,6 +2,8 @@ package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.utils.CurrencyCode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -16,9 +18,11 @@ import java.util.Date;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Document
 @Getter
+@Builder
+@Document
 @NoArgsConstructor
+@AllArgsConstructor
 public class Currency {
 
     /**
@@ -56,7 +60,7 @@ public class Currency {
      * Constructor used for mapping information
      * @param currencyDto the CurrencyDto to be mapped
      */
-    public void UpdateCurrency(CurrencyDto currencyDto) {
+    public void updateCurrency(CurrencyDto currencyDto) {
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();
         this.logo = currencyDto.getLogo();
@@ -64,10 +68,11 @@ public class Currency {
     }
 
     /**
-     * Method to update information
+     * Constructor of Currency using a CurrencyDto
      * @param currencyDto class with new information
      */
-    public void creationCurrency(CurrencyDto currencyDto){
+    public Currency(CurrencyDto currencyDto){
+
         this.currencyCode = currencyDto.getCurrencyCode();
         this.name = currencyDto.getName();
         this.logo = currencyDto.getLogo();
