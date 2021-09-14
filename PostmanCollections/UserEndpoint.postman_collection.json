@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "1a8b0750-720e-4aec-9a39-6215679afaec",
+		"name": "UserEndpoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"documentType\" : \"CC\",\n    \"documentNumber\" : \"1203168342\",\n    \"email\" : \"user.email@email.com\",\n    \"password\" : \"lacontraseña\",\n    \"userState\" : \"ACTIVE\",\n    \"phone\" : 3174414418,\n    \"country\" : \"CO\",\n    \"name\" : \"name\",\n    \"lastName\" : \"lastname\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateInfo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTMyNzE2MDkyYzEyNzM2MjlmYjdlOTgiLCJVU0VSIjpbIlVTRVIiXSwiaWF0IjoxNjMwNjk4ODM4LCJleHAiOjE2MzA3MDAyNzh9.O53TQaebam20f-vaL0wAMs6VA0qag94M4AKfvYQiRPM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"documentType\" : \"CC\",\n    \"documentNumber\" : \"1203168342\",\n    \"email\" : \"user.email.update@email.com\",\n    \"phone\" : 3174414418,\n    \"country\" : \"CO\",\n    \"name\" : \"name\",\n    \"lastName\" : \"lastname\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/user/613d5e23808c0a040d57de91",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"user",
+						"613d5e23808c0a040d57de91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePassword",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTMyNzE2MDkyYzEyNzM2MjlmYjdlOTgiLCJVU0VSIjpbIlVTRVIiXSwiaWF0IjoxNjMwNjk4ODM4LCJleHAiOjE2MzA3MDAyNzh9.O53TQaebam20f-vaL0wAMs6VA0qag94M4AKfvYQiRPM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\" : \"lacontraseña\",\n    \"newPassword\" : \"lanuevacontraseña\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/user/password/613d5e23808c0a040d57de91",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"user",
+						"password",
+						"613d5e23808c0a040d57de91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateState",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTMyNzE2MDkyYzEyNzM2MjlmYjdlOTgiLCJVU0VSIjpbIlVTRVIiXSwiaWF0IjoxNjMwNjk4ODM4LCJleHAiOjE2MzA3MDAyNzh9.O53TQaebam20f-vaL0wAMs6VA0qag94M4AKfvYQiRPM",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userState\" : \"DISABLED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/v1/user/state/613d5e23808c0a040d57de91",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"v1",
+						"user",
+						"state",
+						"613d5e23808c0a040d57de91"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

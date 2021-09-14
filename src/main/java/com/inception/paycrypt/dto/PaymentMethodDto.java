@@ -1,8 +1,8 @@
 package com.inception.paycrypt.dto;
 
+import com.inception.paycrypt.model.Currency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -14,17 +14,17 @@ import java.util.Date;
  */
 @Getter
 @NoArgsConstructor
-public class PaymentMethodDTO {
+public class PaymentMethodDto {
 
     /**
      * The Source Currency identifier
      */
-    private String sourceCurrency_id;
+    private Currency sourceCurrencyId;
 
     /**
      * The Target Currency identifier
      */
-    private String targetCurrency_id;
+    private Currency targetCurrencyId;
 
     /**
      * Percentage of money we are going to charge per transaction made
