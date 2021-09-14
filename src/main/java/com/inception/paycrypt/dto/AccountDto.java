@@ -1,5 +1,7 @@
 package com.inception.paycrypt.dto;
 
+import com.inception.paycrypt.model.Currency;
+import com.inception.paycrypt.utils.AccountState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,9 +24,9 @@ public class AccountDto {
     private String userId;
 
     /**
-     * The currency Id
+     * The currency id
      */
-    private String currencyId;
+    private Currency currencyId;
 
     /**
      * The balance of the account
@@ -34,7 +36,7 @@ public class AccountDto {
     /**
      * The account state
      */
-    private String state;
+    private AccountState state;
 
     /**
      * The account creation date
