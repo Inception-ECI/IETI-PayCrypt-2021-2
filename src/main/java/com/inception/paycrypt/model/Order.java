@@ -65,23 +65,23 @@ public class Order {
      * Constructor used to map a OrderDto to a Order class
      */
     public Order(OrderDto orderDto){
-        this.id = orderDto.getId();
         this.targetCurrency = orderDto.getTargetCurrency();
         this.sourceCurrency = orderDto.getSourceCurrency();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
         this.expirationDate = orderDto.getExpirationDate();
-        this.creationDate = orderDto.getCreationDate();
-
+        this.creationDate = new Date();
     }
 
     /**
      * Update the information of the Order
      */
-    public void Order(OrderDto orderDto){
+    public void update(OrderDto orderDto){
         this.targetCurrency = orderDto.getTargetCurrency();
         this.sourceCurrency = orderDto.getSourceCurrency();
+        this.targetValue = orderDto.getTargetValue();
+        this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
     }
 
