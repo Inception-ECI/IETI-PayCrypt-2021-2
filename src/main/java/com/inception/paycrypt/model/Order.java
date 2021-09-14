@@ -1,11 +1,9 @@
 package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.OrderDto;
-import com.inception.paycrypt.utils.PaymentMethod;
-import com.inception.paycrypt.utils.SourceCurrency;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -17,8 +15,6 @@ import java.util.Date;
  * @version 1.0.0
  * @since 1.0.0
  */
-
-
 @Getter
 @Document
 @NoArgsConstructor
@@ -27,18 +23,18 @@ public class Order {
     /**
      *  ID orden
      */
-    @Indexed(unique = true)
+    @Id
     private String id;
 
     /**
      * Target currency of order
      */
-    private int targetCurrency_id;
+    private Currency targetCurrency;
 
     /**
      * Source currency of order
      */
-    private SourceCurrency sourceCurrency_id;
+    private Currency sourceCurrency;
 
     /**
      * Target value of order
@@ -53,7 +49,7 @@ public class Order {
     /**
      * Payment method of order
      */
-    private PaymentMethod paymentMethod_id;
+    private PaymentMethod paymentMethod;
 
     /**
      * Date expiration of order
@@ -70,11 +66,11 @@ public class Order {
      */
     public Order(OrderDto orderDto){
         this.id = orderDto.getId();
-        this.targetCurrency_id = orderDto.getTargetCurrency_id();
-        this.sourceCurrency_id = orderDto.getSourceCurrency_id();
+        this.targetCurrency = orderDto.getTargetCurrency();
+        this.sourceCurrency = orderDto.getSourceCurrency();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
-        this.paymentMethod_id = orderDto.getPaymentMethod_id();
+        this.paymentMethod = orderDto.getPaymentMethod();
         this.expirationDate = orderDto.getExpirationDate();
         this.creationDate = orderDto.getCreationDate();
 
@@ -84,9 +80,9 @@ public class Order {
      * Update the information of the Order
      */
     public void Order(OrderDto orderDto){
-        this.targetCurrency_id = orderDto.getTargetCurrency_id();
-        this.sourceCurrency_id = orderDto.getSourceCurrency_id();
-        this.paymentMethod_id = orderDto.getPaymentMethod_id();
+        this.targetCurrency = orderDto.getTargetCurrency();
+        this.sourceCurrency = orderDto.getSourceCurrency();
+        this.paymentMethod = orderDto.getPaymentMethod();
     }
 
 }
