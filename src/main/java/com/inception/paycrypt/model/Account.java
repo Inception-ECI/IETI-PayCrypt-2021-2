@@ -3,7 +3,6 @@ package com.inception.paycrypt.model;
 import java.util.Date;
 
 import com.inception.paycrypt.dto.AccountDto;
-import com.inception.paycrypt.utils.State;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;

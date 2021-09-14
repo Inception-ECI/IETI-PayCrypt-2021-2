@@ -21,4 +21,15 @@ public class RequestConversionDto {
 
     private double sourceValue;
 
+    public void setSourceCurrency(CurrencyCode sourceCurrency) {
+        this.sourceCurrency = sourceCurrency;
+    }
+
+    public void setTargetCurrency(CurrencyCode targetCurrency) {
+        this.targetCurrency = targetCurrency;
+    }
+
+    public void setSourceValue(double sourceValue) {
+        this.sourceValue = sourceValue;
+    }
 }
