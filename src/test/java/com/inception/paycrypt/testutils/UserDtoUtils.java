@@ -6,8 +6,20 @@ import com.inception.paycrypt.utils.Country;
 import com.inception.paycrypt.utils.DocumentType;
 import com.inception.paycrypt.utils.UserState;
 
+/**
+ * Util Class used for test
+ *
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class UserDtoUtils {
 
+	/**
+	 * Method to get a valid {@link UserDto}
+	 *
+	 * @return A new {@link User}
+	 */
 	public static UserDto getValidActiveUserDto() {
 
 		return UserDto.builder()
@@ -23,6 +35,11 @@ public class UserDtoUtils {
 					  .build();
 	}
 
+	/**
+	 * Method to get a valid {@link User}
+	 *
+	 * @return A new {@link User}
+	 */
 	public static User getValidActiveUser() {
 
 		return User.builder()
