@@ -15,7 +15,7 @@ public enum ErrorCodeEnum {
 	USER_NOT_FOUND,
 
 	/**
-	 * ´ User with email already exists
+	 * User with email already exists
 	 */
 	USER_WITH_EMAIL_ALREADY_EXISTS,
 

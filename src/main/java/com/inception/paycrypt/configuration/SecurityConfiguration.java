@@ -10,11 +10,24 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+/**
+ * Security configuration class
+ *
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	/**
+	 * Configuration method
+	 *
+	 * @param http HttpSecurity to be configured
+	 * @throws Exception Throws a {@link Exception}
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
