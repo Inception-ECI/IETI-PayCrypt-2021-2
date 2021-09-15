@@ -1,6 +1,7 @@
 package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.PaymentMethodDto;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -29,12 +30,12 @@ public class PaymentMethod{
     /**
      * The Source Currency identifier
      */
-    private Currency sourceCurrencyId;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * The Target Currency identifier
      */
-    private Currency targetCurrencyId;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Percentage of money we are going to charge per transaction made
@@ -57,8 +58,8 @@ public class PaymentMethod{
      * @param paymentMethodDto The {@link PaymentMethodDto} to be mapped
      */
     public PaymentMethod(PaymentMethodDto paymentMethodDto){
-        this.sourceCurrencyId=paymentMethodDto.getSourceCurrencyId();
-        this.targetCurrencyId=paymentMethodDto.getTargetCurrencyId();
+        this.sourceCurrencyCode=paymentMethodDto.getSourceCurrencyCode();
+        this.targetCurrencyCode=paymentMethodDto.getTargetCurrencyCode();
         this.fee=paymentMethodDto.getFee();
         this.creationDate=paymentMethodDto.getCreationDate();
         this.modificationDate=paymentMethodDto.getModificationDate();

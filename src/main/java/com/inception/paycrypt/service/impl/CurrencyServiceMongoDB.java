@@ -4,9 +4,12 @@ import java.util.Optional;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.exception.CurrencyServiceException;
+import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.Currency;
+import com.inception.paycrypt.model.User;
 import com.inception.paycrypt.repository.CurrencyRepository;
 import com.inception.paycrypt.service.CurrencyService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,22 @@ public class CurrencyServiceMongoDB implements CurrencyService {
 	 * MongoDB repository where the information is going to be extracted
 	 */
 	private final CurrencyRepository currencyRepository;
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Currency findByCode(final CurrencyCode currencyCode) {
+
+		Optional<Currency> optionalCurrency = currencyRepository.findByCurrencyCode(currencyCode);
+
+		if (optionalCurrency.isPresent()) {
+
+			return optionalCurrency.get();
+		}
+
+		throw new CurrencyServiceException(CurrencyServiceException.CURRENCY_NOT_FOUND);
+	}
 
 	/**
 	 * {@inheritDoc}
