@@ -61,6 +61,11 @@ public class User {
 	private UserState userState;
 
 	/**
+	 * The user role
+	 */
+	private String role;
+
+	/**
 	 * The user phone
 	 */
 	private String phone;
@@ -102,6 +107,7 @@ public class User {
 		this.email = userDto.getEmail();
 		this.password = userDto.getPassword();
 		this.userState = userDto.getUserState();
+		this.role = userDto.getRole();
 		this.phone = userDto.getPhone();
 		this.country = userDto.getCountry();
 		this.name = userDto.getName();

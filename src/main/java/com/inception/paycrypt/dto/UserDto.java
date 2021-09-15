@@ -52,6 +52,11 @@ public class UserDto {
 	private UserState userState;
 
 	/**
+	 * The user role
+	 */
+	private String role;
+
+	/**
 	 * The user phone
 	 */
 	private String phone;
