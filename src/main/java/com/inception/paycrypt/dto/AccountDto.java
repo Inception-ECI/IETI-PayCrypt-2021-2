@@ -1,7 +1,7 @@
 package com.inception.paycrypt.dto;
 
-import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.utils.AccountState;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +26,7 @@ public class AccountDto {
     /**
      * The currency id
      */
-    private Currency currencyId;
+    private CurrencyCode currencyCode;
 
     /**
      * The balance of the account
