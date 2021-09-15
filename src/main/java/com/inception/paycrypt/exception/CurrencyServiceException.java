@@ -25,7 +25,7 @@ public class CurrencyServiceException extends InternalServerErrorException {
 	 */
 	public CurrencyServiceException(String message) {
 
-		super(new ServerErrorResponseDto(message, ErrorCodeEnum.USER_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+		super(new ServerErrorResponseDto(message, ErrorCodeEnum.CURRENCY_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
 	}
 
 }

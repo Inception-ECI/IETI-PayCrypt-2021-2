@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.inception.paycrypt.dto.AccountDto;
 import com.inception.paycrypt.utils.AccountState;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -35,7 +36,7 @@ public class Account {
     /**
      * The currency id
      */
-    private Currency currencyId;
+    private CurrencyCode currencyCode;
 
     /**
      * the balance of the account
@@ -64,7 +65,7 @@ public class Account {
      */
     public Account(AccountDto accountDto){
         this.userId = accountDto.getUserId();
-        this.currencyId = accountDto.getCurrencyId();
+        this.currencyCode = accountDto.getCurrencyCode();
         this.balance = accountDto.getBalance();
         this.state = accountDto.getState();
         this.creationDate = new Date();

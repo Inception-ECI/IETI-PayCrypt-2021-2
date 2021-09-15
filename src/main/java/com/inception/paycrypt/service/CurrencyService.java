@@ -2,6 +2,7 @@ package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.model.Currency;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,6 +14,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface CurrencyService {
+
+	/**
+	 * Find a currency given his code
+	 *
+	 * @param currencyCode The currency code
+	 * @return The currency that has been found
+	 */
+	Currency findByCode(final CurrencyCode currencyCode);
 
 	/**
 	 * Create a Currency
