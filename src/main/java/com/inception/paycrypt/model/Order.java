@@ -1,6 +1,7 @@
 package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.OrderDto;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -29,12 +30,12 @@ public class Order {
     /**
      * Target currency of order
      */
-    private Currency targetCurrency;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Source currency of order
      */
-    private Currency sourceCurrency;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * Target value of order
@@ -65,23 +66,23 @@ public class Order {
      * Constructor used to map a OrderDto to a Order class
      */
     public Order(OrderDto orderDto){
-        this.id = orderDto.getId();
-        this.targetCurrency = orderDto.getTargetCurrency();
-        this.sourceCurrency = orderDto.getSourceCurrency();
+        this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+        this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
         this.expirationDate = orderDto.getExpirationDate();
-        this.creationDate = orderDto.getCreationDate();
-
+        this.creationDate = new Date();
     }
 
     /**
      * Update the information of the Order
      */
-    public void Order(OrderDto orderDto){
-        this.targetCurrency = orderDto.getTargetCurrency();
-        this.sourceCurrency = orderDto.getSourceCurrency();
+    public void update(OrderDto orderDto){
+        this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+        this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
+        this.targetValue = orderDto.getTargetValue();
+        this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
     }
 

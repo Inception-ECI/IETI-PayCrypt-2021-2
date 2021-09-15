@@ -2,6 +2,7 @@ package com.inception.paycrypt.dto;
 
 import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.model.PaymentMethod;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,12 +27,12 @@ public class OrderDto {
     /**
      * Target currency of order
      */
-    private Currency targetCurrency;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Source currency of order
      */
-    private Currency sourceCurrency;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * Target value of order

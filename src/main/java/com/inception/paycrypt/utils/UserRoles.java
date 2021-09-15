@@ -1,7 +1,8 @@
 package com.inception.paycrypt.utils;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Enum class for users roles
@@ -11,21 +12,17 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0.0
  */
 @Getter
-@RequiredArgsConstructor
-public enum UserRoles {
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+public final class UserRoles {
 
 	/**
 	 * Administration Role
 	 */
-	ADMIN("Administrator"),
+	public static final String ADMIN = "Administrator";
 
 	/**
 	 * User role
 	 */
-	USER("User");
+	public static final String USER = "User";
 
-	/**
-	 * Description of the roles
-	 */
-	private final String description;
 }

@@ -1,12 +1,12 @@
 package com.inception.paycrypt.model;
 
-import com.inception.paycrypt.dto.PaymentMethodDTO;
+import com.inception.paycrypt.dto.PaymentMethodDto;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 /**
@@ -30,12 +30,12 @@ public class PaymentMethod{
     /**
      * The Source Currency identifier
      */
-    private String sourceCurrency_id;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * The Target Currency identifier
      */
-    private String targetCurrency_id;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Percentage of money we are going to charge per transaction made
@@ -55,14 +55,14 @@ public class PaymentMethod{
     /**
      * Constructor used to map a PaymentMethodDTO to a PaymentMethod class
      *
-     * @param PaymentMethodDTO The {@link PaymentMethodDTO} to be mapped
+     * @param paymentMethodDto The {@link PaymentMethodDto} to be mapped
      */
-    public PaymentMethod(PaymentMethodDTO PaymentMethodDTO){
-        this.sourceCurrency_id=PaymentMethodDTO.getSourceCurrency_id();
-        this.targetCurrency_id=PaymentMethodDTO.getTargetCurrency_id();
-        this.fee=PaymentMethodDTO.getFee();
-        this.creationDate=PaymentMethodDTO.getCreationDate();
-        this.modificationDate=PaymentMethodDTO.getModificationDate();
+    public PaymentMethod(PaymentMethodDto paymentMethodDto){
+        this.sourceCurrencyCode=paymentMethodDto.getSourceCurrencyCode();
+        this.targetCurrencyCode=paymentMethodDto.getTargetCurrencyCode();
+        this.fee=paymentMethodDto.getFee();
+        this.creationDate=paymentMethodDto.getCreationDate();
+        this.modificationDate=paymentMethodDto.getModificationDate();
 
     }
 }
