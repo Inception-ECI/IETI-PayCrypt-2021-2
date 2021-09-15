@@ -13,6 +13,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -20,15 +21,32 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+/**
+ * Implementation class for conversionService
+ *
+ * @author Juan Ramos
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+@Component("conversionServiceImpl")
 public class ConversionServiceImpl implements ConversionService {
 
+    /**
+     *
+     */
     @Value("${currency.api.url}")
     private String currencyUrl;
 
+    /**
+     *
+     * @param request request value RequestConversionDto
+     * @return
+     * @throws IOException
+     */
     @Override
     public ResponseConversionDto conversionCurrency(RequestConversionDto request) throws IOException {
         HttpResponse response = requestToApi(request.getSourceCurrency().name(), request.getTargetCurrency().name());
+        System.out.println(response);
         ResponseConversionDto responseConversionDto = null;
         if (response != null) {
             HttpEntity entity = response.getEntity();
@@ -45,6 +63,12 @@ public class ConversionServiceImpl implements ConversionService {
         return responseConversionDto;
     }
 
+    /**
+     *
+     * @param request request value  RequestConversionDto
+     * @return
+     * @throws IOException
+     */
     @Override
     public List<ResponseConversionDto> conversionCurrencyWithMoreCurrency(RequestConversionMore request) throws IOException {
         List<ResponseConversionDto> response = new ArrayList<>();
@@ -59,10 +83,17 @@ public class ConversionServiceImpl implements ConversionService {
         return response;
     }
 
+    /**
+     *
+     * @param sourceCurrency
+     * @param targetCurrency
+     * @return
+     */
     private HttpResponse requestToApi(String sourceCurrency, String targetCurrency) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         HttpResponse response = null;
+        System.out.println(currencyUrl + sourceCurrency.toLowerCase() + "/" + targetCurrency.toLowerCase() + ".json");
         HttpGet request = new HttpGet(currencyUrl + sourceCurrency.toLowerCase() + "/" + targetCurrency.toLowerCase() + ".json");
         try {
             response = httpClient.execute(request);

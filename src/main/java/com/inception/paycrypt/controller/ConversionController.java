@@ -31,7 +31,7 @@ public class ConversionController {
     /**
      * Conversion service variable
      */
-    private ConversionService conversionService;
+    private final ConversionService conversionService;
 
     /**
      * Method to convert a pair of currency
@@ -44,6 +44,7 @@ public class ConversionController {
         try {
             return new ResponseEntity<>(conversionService.conversionCurrency(request), HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -59,6 +60,7 @@ public class ConversionController {
         try {
             return new ResponseEntity<>(conversionService.conversionCurrencyWithMoreCurrency(request), HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
