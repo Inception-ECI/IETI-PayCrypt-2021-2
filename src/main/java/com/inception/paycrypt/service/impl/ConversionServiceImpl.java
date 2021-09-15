@@ -1,8 +1,10 @@
 package com.inception.paycrypt.service.impl;
 
 import com.inception.paycrypt.dto.RequestConversionDto;
+import com.inception.paycrypt.dto.RequestConversionMore;
 import com.inception.paycrypt.dto.ResponseConversionDto;
 import com.inception.paycrypt.service.ConversionService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ConversionServiceImpl implements ConversionService {
@@ -33,12 +37,26 @@ public class ConversionServiceImpl implements ConversionService {
             responseConversionDto=new ResponseConversionDto();
             responseConversionDto.setCurrency(request.getTargetCurrency());
             responseConversionDto.setDate(json.get("date").toString());
-            BigDecimal value =(BigDecimal) json.get(request.getTargetCurrency().name().toLowerCase());
+            BigDecimal value =new BigDecimal(String.valueOf(json.get(request.getTargetCurrency().name().toLowerCase())));
             value =value.multiply(BigDecimal.valueOf(request.getSourceValue()));
             responseConversionDto.setValue(value);
         }
 
         return responseConversionDto;
+    }
+
+    @Override
+    public List<ResponseConversionDto> conversionCurrencyWithMoreCurrency(RequestConversionMore request) throws IOException {
+        List<ResponseConversionDto> response = new ArrayList<>();
+        for (CurrencyCode currencyCode:request.getCurrencyCodes()){
+            RequestConversionDto requestConversionDto = new RequestConversionDto();
+            requestConversionDto.setTargetCurrency(currencyCode);
+            requestConversionDto.setSourceCurrency(request.getSourceCurrency());
+            requestConversionDto.setSourceValue(request.getSourceValue());
+            response.add(conversionCurrency(requestConversionDto));
+        }
+
+        return response;
     }
 
     private HttpResponse requestToApi(String sourceCurrency, String targetCurrency) {
