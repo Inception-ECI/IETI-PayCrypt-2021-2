@@ -19,9 +19,18 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ResponseConversionDto {
 
+    /**
+     * Response to conversion result
+     */
     private BigDecimal value;
 
+    /**
+     * date of data api update
+     */
     private String date;
 
+    /**
+     *  CurrencyCode for value
+     */
     private CurrencyCode currency;
 }
