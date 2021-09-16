@@ -83,11 +83,21 @@ public class Account {
         this.modificationDate = new Date();
     }
 
+    /**
+     * Method used to update information of the account
+     *
+     * @param balance of the account
+     */
     public void updateBalance(final String balance){
         this.balance = balance;
         this.modificationDate = new Date();
     }
 
+    /**
+     * Method used to update information of the account
+     *
+     * @param state of the account
+     */
     public void updateState(final AccountState state){
         this.state = state;
         this.modificationDate = new Date();

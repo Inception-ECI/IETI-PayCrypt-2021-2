@@ -2,7 +2,6 @@ package com.inception.paycrypt.service.impl;
 
 import com.inception.paycrypt.dto.AccountDto;
 import com.inception.paycrypt.exception.AccountServiceException;
-import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.Account;
 import com.inception.paycrypt.repository.AccountRepository;
 import com.inception.paycrypt.service.AccountService;
@@ -49,9 +48,8 @@ public class AccountServiceMongoDB implements AccountService {
             return optionalAccount.get();
         }
 
-        throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
     }
-
 
     /**
      * {@inheritDoc}
@@ -68,7 +66,7 @@ public class AccountServiceMongoDB implements AccountService {
             return account;
         }
 
-        throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
     }
 
     /**
@@ -86,7 +84,7 @@ public class AccountServiceMongoDB implements AccountService {
             return account;
         }
 
-        throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
     }
 
     /**
@@ -104,12 +102,11 @@ public class AccountServiceMongoDB implements AccountService {
             return account;
         }
 
-        throw new UserServiceException(UserServiceException.USER_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
-     * @param id
      */
     @Override
     public void deleteById(final String id) {

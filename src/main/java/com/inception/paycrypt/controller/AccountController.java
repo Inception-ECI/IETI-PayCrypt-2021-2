@@ -3,10 +3,8 @@ package com.inception.paycrypt.controller;
 import com.inception.paycrypt.dto.AccountDto;
 import com.inception.paycrypt.model.Account;
 import com.inception.paycrypt.service.AccountService;
-import com.inception.paycrypt.utils.AccountState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +20,9 @@ import static com.inception.paycrypt.utils.UserRoles.USER;
  * @version 1.0.0
  * @since 1.0.0
  */
-
 @RestController
 @RequestMapping("/v1/account")
+@RolesAllowed(ADMIN)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountController {
 
@@ -40,13 +38,7 @@ public class AccountController {
      */
     @GetMapping( "/{id}" )
     public ResponseEntity<Account> findById (@PathVariable  String id){
-        try{
-            return ResponseEntity.status(HttpStatus.OK).body(accountService.findById(id));
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-
-        }
+        return ResponseEntity.ok(accountService.findById(id));
     }
 
     /**
@@ -105,13 +97,7 @@ public class AccountController {
     @DeleteMapping("/{id}")
     @RolesAllowed(ADMIN)
     public  ResponseEntity<Boolean> delete(@PathVariable String id){
-        try{
-            accountService.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(Boolean.TRUE);
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Boolean.FALSE);
-
-        }
+        accountService.deleteById(id);
+        return ResponseEntity.ok(Boolean.TRUE);
     }
 }

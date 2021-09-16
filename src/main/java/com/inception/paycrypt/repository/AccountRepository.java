@@ -19,7 +19,7 @@ public interface AccountRepository extends MongoRepository<Account,String>  {
      * Method to find a account by his id
      *
      * @param id The User email
-     * @return The Optional for the User
+     * @return The Optional for the Account
      */
     Optional<Account> findBy(String id);
 }
