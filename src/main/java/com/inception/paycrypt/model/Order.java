@@ -103,4 +103,27 @@ public class Order {
         this.modificationDate = new Date();
     }
 
+    /**
+     * Update date expiration
+     */
+    public void updateExpiration(Date expirationDate){
+        this.expirationDate = expirationDate;
+
+    }
+
+    /**
+     * Update the information of the Order (Target)
+     */
+    public void updateTarget(final CurrencyCode targetCurrencyCode){
+        this.targetCurrencyCode = targetCurrencyCode;
+
+    }
+
+    /**
+     * Update the information of the Order (Source)
+     */
+    public void updateSource(final CurrencyCode sourceCurrencyCode){
+        this.sourceCurrencyCode = sourceCurrencyCode;
+    }
+
 }

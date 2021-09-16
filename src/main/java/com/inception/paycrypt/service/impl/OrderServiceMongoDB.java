@@ -58,4 +58,60 @@ public class OrderServiceMongoDB implements OrderService {
 
         throw new UserServiceException(OrderServiceException.ORDER_NOT_FOUND);
     }
-}
+
+
+}  /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateOrderDate(final OrderDto orderDto, final String id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.updateExpiration(orderDto.getExpirationDate());
+            orderRepository.save(order);
+            return order;
+        }
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateTargetValue(final String orderId, final CurrencyCode targetCurrencyCode) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.updateTarget(targetCurrencyCode);
+            orderRepository.save(order);
+            return order;
+        }
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateSourceValue(final String orderId, final CurrencyCode sourceCurrencyCode) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.updateSource(sourceCurrencyCode);
+            orderRepository.save(order);
+            return order;
+        }
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteOrder(final String id) {
+        if(!orderRepository.existsById(id)){
+            throw  new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+        }
+        orderRepository.deleteById(id);
+    }
