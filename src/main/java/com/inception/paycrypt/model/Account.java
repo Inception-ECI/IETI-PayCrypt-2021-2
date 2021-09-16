@@ -77,9 +77,19 @@ public class Account {
      *
      * @param accountDto The {@link AccountDto} to be mapped
      */
-    public void updateAccount(AccountDto accountDto){
+    public void updateAccount(final AccountDto accountDto){
         this.balance = accountDto.getBalance();
         this.state = accountDto.getState();
+        this.modificationDate = new Date();
+    }
+
+    public void updateBalance(final String balance){
+        this.balance = balance;
+        this.modificationDate = new Date();
+    }
+
+    public void updateState(final AccountState state){
+        this.state = state;
         this.modificationDate = new Date();
     }
 }

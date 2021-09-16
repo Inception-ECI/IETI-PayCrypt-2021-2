@@ -32,6 +32,11 @@ public enum ErrorCodeEnum {
 	/**
 	 * Invalid user credentials
 	 */
-	INVALID_USER_CREDENTIALS
+	INVALID_USER_CREDENTIALS,
+
+	/**
+	 * User not found
+	 */
+	ACCOUNT_NOT_FOUND
 
 }

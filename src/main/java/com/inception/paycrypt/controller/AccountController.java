@@ -81,8 +81,8 @@ public class AccountController {
      */
     @PutMapping("/{balance}")
     @RolesAllowed({USER})
-    public ResponseEntity<Account> updateBalance (@RequestBody AccountDto accountDto, @PathVariable String balance){
-        return ResponseEntity.ok(accountService.updateBalance(accountDto, balance));
+    public ResponseEntity<Account> updateBalance (@RequestBody AccountDto accountDto,@PathVariable String balance){
+        return ResponseEntity.ok(accountService.updateBalance(balance, accountDto.getBalance()));
     }
 
     /**
@@ -93,8 +93,8 @@ public class AccountController {
      */
     @PutMapping("/{state}")
     @RolesAllowed({USER})
-    public ResponseEntity<Account> updateState (@RequestBody AccountDto accountDto, @PathVariable AccountState state){
-        return ResponseEntity.ok(accountService.updateState(accountDto, state));
+    public ResponseEntity<Account> updateState (@RequestBody AccountDto accountDto, @PathVariable String state){
+        return ResponseEntity.ok(accountService.updateState(state, accountDto.getState()));
     }
 
     /**

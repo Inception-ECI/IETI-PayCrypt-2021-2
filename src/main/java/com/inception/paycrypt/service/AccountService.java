@@ -41,19 +41,19 @@ public interface AccountService {
 
     /**
      * Method to update balance of the account a {@link Account}
-     * @param accountDto The {@link AccountDto} with the new information
+     * @param id The {@link AccountDto} with the new information
      * @param balance The {@link AccountDto} id to be updated in the record
      * @return The update {@link AccountDto}
      */
-    Account updateBalance(final AccountDto accountDto, final String balance);
+    Account updateBalance(final String id, final String balance);
 
     /**
      * Method to update state of the account a {@link Account}
-     * @param accountDto The {@link AccountDto} with the new information
+     * @param id The {@link AccountDto} with the new information
      * @param state The {@link AccountDto} id to be updated in the record
      * @return The update {@link AccountDto}
      */
-    Account updateState(final AccountDto accountDto, final AccountState state);
+    Account updateState(final String id, final AccountState state);
 
     /**
      * Method to delete account a {@link Account}
