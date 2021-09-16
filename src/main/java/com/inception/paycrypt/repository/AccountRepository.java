@@ -11,4 +11,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @since 1.0.0
  */
 public interface AccountRepository extends MongoRepository<Account,String>  {
+
 }

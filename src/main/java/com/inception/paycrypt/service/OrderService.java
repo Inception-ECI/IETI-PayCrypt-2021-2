@@ -14,14 +14,42 @@ import com.inception.paycrypt.utils.CurrencyCode;
  */
 public interface OrderService {
 
+    /***
+     * Create order
+     * @param orderDto
+     * @return
+     */
     Order create(OrderDto orderDto);
 
+    /**
+     * Update a order
+     * @param orderDto
+     * @param id
+     * @return
+     */
     Order updateOrderDate (OrderDto orderDto, String id );
 
+    /**
+     * Delete a order
+     * @param id
+     */
     void deleteOrder(String id);
 
+    /**
+     * Update of target currency
+     * @param orderDto
+     * @param targetCurrencyCode
+     * @return
+     */
     Order updateTargetValue (OrderDto orderDto, CurrencyCode targetCurrencyCode);
 
+    /**
+     * Update of sources currency
+     *
+     * param orderDto
+     * @param sourceCurrencyCode
+     * @return
+     */
     Order updateSourcetValue (OrderDto orderDto, CurrencyCode sourceCurrencyCode);
 
 

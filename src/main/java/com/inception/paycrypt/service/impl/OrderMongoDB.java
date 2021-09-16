@@ -30,13 +30,28 @@ import static com.inception.paycrypt.utils.UserRoles.ADMIN;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OrderMongoDB implements OrderService{
 
+    /**
+     *
+     * Order information extraction
+     */
     private final OrderRepository orderRepository;
 
+    /**
+     * create Order
+     * @param orderDto
+     * @return
+     */
     @Override
     public Order create(OrderDto orderDto) {
         return orderRepository.save(new Order(orderDto));
     }
 
+    /**
+     * Update of order date
+     * @param orderDto
+     * @param id
+     * @return
+     */
     @Override
     public Order updateOrderDate(OrderDto orderDto, String id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
@@ -49,6 +64,11 @@ public class OrderMongoDB implements OrderService{
         throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
     }
 
+    /**
+     * Delete order
+     *
+     * @param id
+     */
     @Override
     public void deleteOrder(String id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
@@ -58,6 +78,13 @@ public class OrderMongoDB implements OrderService{
         orderRepository.deleteById(id);
     }
 
+    /**
+     * Update of order  by target currecy
+     *
+     * @param orderDto
+     * @param targetCurrencyCode
+     * @return
+     */
     @Override
     public Order updateTargetValue(OrderDto orderDto, CurrencyCode targetCurrencyCode) {
         Optional<Order> optionalOrder = orderRepository.findById(orderDto.getId());
@@ -70,6 +97,13 @@ public class OrderMongoDB implements OrderService{
         throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
     }
 
+    /**
+     *Update of order  by source currency
+     *
+     * @param orderDto
+     * @param sourceCurrencyCode
+     * @return
+     */
     @Override
     public Order updateSourcetValue(OrderDto orderDto, CurrencyCode sourceCurrencyCode) {
         Optional<Order> optionalOrder = orderRepository.findById(orderDto.getId());

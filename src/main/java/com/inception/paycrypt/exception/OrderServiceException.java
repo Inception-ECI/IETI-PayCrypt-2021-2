@@ -6,14 +6,20 @@ import org.springframework.http.HttpStatus;
 
 public class OrderServiceException extends InternalServerErrorException {
 
+    /**
+     *
+     * Order not found
+     */
+    public static final String ORDEN_NOT_FOUND = "Order not found";
 
-    public static final String ORDEN_NOT_FOUND = "Orden not found";
-
+    /**
+     * Constructor
+     *
+     * @param message
+     */
     public OrderServiceException(String message) {
         super(new ServerErrorResponseDto(message, ErrorCodeEnum.ORDEN_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
-
-
 
 
 }
