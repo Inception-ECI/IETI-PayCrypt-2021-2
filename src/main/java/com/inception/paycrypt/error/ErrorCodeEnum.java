@@ -32,6 +32,10 @@ public enum ErrorCodeEnum {
 	/**
 	 * Invalid user credentials
 	 */
-	INVALID_USER_CREDENTIALS
+	INVALID_USER_CREDENTIALS,
 
+	/**
+	 * Order not found
+	 */
+	ORDER_NOT_FOUND
 }
