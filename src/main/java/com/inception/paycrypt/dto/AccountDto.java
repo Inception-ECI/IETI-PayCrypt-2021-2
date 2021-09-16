@@ -47,4 +47,5 @@ public class AccountDto {
      * The account modification date
      */
     private Date modificationDate;
+
 }
