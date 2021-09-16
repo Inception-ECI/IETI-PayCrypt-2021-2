@@ -58,8 +58,8 @@ public class PaymentMethod {
      * @param paymentMethodDto The {@link PaymentMethodDto} to be mapped
      */
     public PaymentMethod(PaymentMethodDto paymentMethodDto) {
-        this.sourceCurrencyId = paymentMethodDto.getSourceCurrencyId();
-        this.targetCurrencyId = paymentMethodDto.getTargetCurrencyId();
+        this.sourceCurrencyCode = paymentMethodDto.getSourceCurrencyCode();
+        this.targetCurrencyCode = paymentMethodDto.getTargetCurrencyCode();
         this.fee = paymentMethodDto.getFee();
         this.creationDate = new Date();
         this.modificationDate = new Date();
@@ -71,8 +71,8 @@ public class PaymentMethod {
      * @param paymentMethodDto The {@link PaymentMethodDto} that contains the new information
      */
     public void update(PaymentMethodDto paymentMethodDto) {
-        this.sourceCurrencyId = paymentMethodDto.getSourceCurrencyId();
-        this.targetCurrencyId = paymentMethodDto.getTargetCurrencyId();
+        this.sourceCurrencyCode = paymentMethodDto.getSourceCurrencyCode();
+        this.targetCurrencyCode = paymentMethodDto.getTargetCurrencyCode();
         this.fee = paymentMethodDto.getFee();
         this.modificationDate = new Date();
     }
