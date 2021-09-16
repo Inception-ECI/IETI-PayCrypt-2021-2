@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import javax.annotation.security.RolesAllowed;
+import static com.inception.paycrypt.utils.UserRoles.ADMIN;
+
 
 /**
  * Payment Method Controller
@@ -32,6 +35,7 @@ public class PaymentMethodController {
      * @return The {@link PaymentMethod} saved in the server
      */
     @PostMapping
+    @RolesAllowed(ADMIN)
     public ResponseEntity<PaymentMethod> create(@RequestBody PaymentMethodDto paymentMethodDto) {
 
         return ResponseEntity.ok(paymentMethodService.create(paymentMethodDto));
@@ -45,6 +49,7 @@ public class PaymentMethodController {
      * @return The {@link PaymentMethod} after being updated
      */
     @PutMapping("/{id}")
+    @RolesAllowed(ADMIN)
     public ResponseEntity<PaymentMethod> update(@RequestBody PaymentMethodDto paymentMethodDto, @PathVariable String id) {
 
         return ResponseEntity.ok(paymentMethodService.update(paymentMethodDto, id));
@@ -57,6 +62,7 @@ public class PaymentMethodController {
      * @return The {@link PaymentMethod} after being Delete
      */
     @DeleteMapping("/{id}")
+    @RolesAllowed(ADMIN)
     public ResponseEntity<Boolean> Delete(@PathVariable String id) {
         paymentMethodService.deleteById(id);
         return ResponseEntity.ok(true);
