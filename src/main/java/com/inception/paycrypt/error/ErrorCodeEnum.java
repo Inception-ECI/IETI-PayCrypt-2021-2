@@ -35,6 +35,11 @@ public enum ErrorCodeEnum {
 	INVALID_USER_CREDENTIALS,
 
 	/**
+	 * Orden not found
+	 */
+	ORDEN_NOT_FOUND,
+  
+  /*
 	 * account not found
 	 */
 	ACCOUNT_NOT_FOUND,

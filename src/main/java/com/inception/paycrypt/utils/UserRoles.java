@@ -25,4 +25,9 @@ public final class UserRoles {
 	 */
 	public static final String USER = "User";
 
+	/**
+	 * Merchant role
+	 */
+	public static final String MERCHANT = "Merchant";
+
 }
