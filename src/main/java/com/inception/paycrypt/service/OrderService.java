@@ -1,34 +1,43 @@
 package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.OrderDto;
-import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.model.Order;
 import com.inception.paycrypt.utils.CurrencyCode;
+import org.springframework.stereotype.Service;
 
 /**
- * Define the signature to implement an Order Service
+ * Order services
  *
- * @author Laura Bernal
+ * @author Daniel Rincón (daniel.rincon-m@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
+@Service
 public interface OrderService {
 
-    /***
-     * Create order
+    /**
+     * Create an order in database
      *
-     * @param orderDto
-     * @return
+     * @param orderDto The data of the order to be created
+     * @return The created order
      */
-    Order create(final OrderDto orderDto);
+    Order create(OrderDto orderDto);
 
     /**
-     * Find by id
+     * Upate an order in database
      *
-     * @param id
-     * @return
+     * @param order The new data of the order to be updated
+     * @return The order returned from the database
      */
-    Order findById(final String id);
+    Order update(Order order);
+
+    /**
+     * Finds an order in database by id
+     *
+     * @param id The id of the order
+     * @return The order found in database
+     */
+    Order findById(String id);
 
     /**
      * Update a order
@@ -62,5 +71,4 @@ public interface OrderService {
      * @param id
      */
     void deleteOrder(String id);
-
 }

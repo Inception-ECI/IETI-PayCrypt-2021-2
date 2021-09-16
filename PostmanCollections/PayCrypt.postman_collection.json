@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6e000893-583d-4e57-9a0c-c34b642ce741",
+		"_postman_id": "539b962f-1b62-4991-9837-f88144c39e88",
 		"name": "PayCrypt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -363,26 +363,31 @@
 			]
 		},
 		{
-			"name": "Conversion",
+			"name": "Payment Link",
 			"item": [
 				{
-					"name": "ConversionRequestCOP-USD",
+					"name": "generate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"pm.environment.set('currentDate', dateNow.toISOString());\r",
+									"//Current Date + 10 days\r",
+									"var moment = require(\"moment\")\r",
+									"pm.environment.set('expirationDate', moment().add(10, 'days').toISOString())"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"COP\",\r\n    \"targetCurrency\":\"USD\",\r\n    \"sourceValue\":1000000\r\n}",
+							"raw": "{\r\n    \"sourceCurrencyCode\" : \"COP\",\r\n    \"targetCurrencyCode\" : \"EUR\",\r\n    \"targetValue\" : \"50\",\r\n    \"expirationDate\" : \"{{expirationDate}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -390,7 +395,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
+							"raw": "http://localhost:8080/v1/payment/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -398,30 +403,21 @@
 							"port": "8080",
 							"path": [
 								"v1",
-								"conversion"
+								"payment",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "ConversionRequestUSD-BTC",
+					"name": "Pay",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"USD\",\r\n    \"targetCurrency\":\"BTC\",\r\n    \"sourceValue\":1000000\r\n}",
+							"raw": "{\r\n    \"paymentToken\" : \"6143602ca1b2791aa48f490f\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -429,7 +425,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
+							"raw": "http://localhost:8080/v1/payment/pay",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -437,203 +433,8 @@
 							"port": "8080",
 							"path": [
 								"v1",
-								"conversion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestBTC-USD",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"BTC\",\r\n    \"targetCurrency\":\"USD\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestUSD-ETH",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"USD\",\r\n    \"targetCurrency\":\"ETH\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestLTC-EUR",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"LTC\",\r\n    \"targetCurrency\":\"EUR\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestARS-BRL",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"sourceCurrency\":\"ARS\",\r\n    \"targetCurrency\":\"BRL\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestARS->BRL-USD-EUR",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"currencyCodes\":[\"BRL\",\"USD\",\"EUR\"],\r\n    \"sourceCurrency\":\"ARS\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion/more",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion",
-								"more"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "ConversionRequestCOP->BTC-USD-EUR",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"currencyCodes\":[\"BTC\",\"USD\",\"EUR\"],\r\n    \"sourceCurrency\":\"COP\",\r\n    \"sourceValue\":1000000\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/v1/conversion/more",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"v1",
-								"conversion",
-								"more"
+								"payment",
+								"pay"
 							]
 						}
 					},
@@ -642,7 +443,7 @@
 			]
 		},
 		{
-			"name": "PaymentMethod",
+			"name": "Account",
 			"item": [
 				{
 					"name": "create",
@@ -652,7 +453,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQzNTAzMWI4ZWFkYjBiN2UzNzMzOTYiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE4MDE0MjYsImV4cCI6MTYzMTgwMzIyNn0.p4nplP_J4kCEwvKkrAW7o_hooPYyls_5tlpx0N0hHuA",
 									"type": "string"
 								}
 							]
@@ -661,7 +462,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sourceCurrencyCode\" : \"USD\",\n    \"targetCurrencyCode\" : \"BTC\",\n    \"fee\" : \"2\"\n}",
+							"raw": "{\n    \"userId\" : \"61435031b8eadb0b7e373396\",\n    \"currencyCode\" : \"BTC\",\n    \"balance\" : \"5\",\n    \"state\" : \"ACTIVE\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -669,7 +470,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/paymentMethod",
+							"raw": "http://localhost:8080/v1/account",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -677,21 +478,64 @@
 							"port": "8080",
 							"path": [
 								"v1",
-								"paymentMethod"
+								"account"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "update",
+					"name": "findById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQzNTAzMWI4ZWFkYjBiN2UzNzMzOTYiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE4MDE0MjYsImV4cCI6MTYzMTgwMzIyNn0.p4nplP_J4kCEwvKkrAW7o_hooPYyls_5tlpx0N0hHuA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/account/614350bcb8eadb0b7e373397",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"account",
+								"614350bcb8eadb0b7e373397"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQzNTAzMWI4ZWFkYjBiN2UzNzMzOTYiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE4MDE0MjYsImV4cCI6MTYzMTgwMzIyNn0.p4nplP_J4kCEwvKkrAW7o_hooPYyls_5tlpx0N0hHuA",
 									"type": "string"
 								}
 							]
@@ -700,7 +544,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"sourceCurrencyCode\" : \"USD\",\n    \"targetCurrencyCode\" : \"BTC\",\n    \"fee\" : \"5\"\n}",
+							"raw": "{\n    \"balance\" : \"2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -708,7 +552,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/v1/paymentMethod/6142b725bfcab1342084727b",
+							"raw": "http://localhost:8080/v1/account/614350bcb8eadb0b7e373397",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -716,39 +560,88 @@
 							"port": "8080",
 							"path": [
 								"v1",
-								"paymentMethod",
-								"6142b725bfcab1342084727b"
+								"account",
+								"614350bcb8eadb0b7e373397"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "delete",
+					"name": "update_state",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQyYjQ0Y2JmY2FiMTM0MjA4NDcyNzkiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE3NjE4MTgsImV4cCI6MTYzMTc2MzYxOH0.MsrO89GT7XuWSlpv2eEmGmNQS8cZ7B4leZW1boNzU7k",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQzNTAzMWI4ZWFkYjBiN2UzNzMzOTYiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE4MDE0MjYsImV4cCI6MTYzMTgwMzIyNn0.p4nplP_J4kCEwvKkrAW7o_hooPYyls_5tlpx0N0hHuA",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"state\" : \"ACTIVE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8090/v1/paymentMethod/6142b725bfcab1342084727b",
+							"raw": "http://localhost:8080/v1/account/614350bcb8eadb0b7e373397",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8090",
+							"port": "8080",
 							"path": [
 								"v1",
-								"paymentMethod",
-								"6142b725bfcab1342084727b"
+								"account",
+								"614350bcb8eadb0b7e373397"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_balance_state",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQzNTAzMWI4ZWFkYjBiN2UzNzMzOTYiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE4MDE0MjYsImV4cCI6MTYzMTgwMzIyNn0.p4nplP_J4kCEwvKkrAW7o_hooPYyls_5tlpx0N0hHuA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"balance\" : \"9\",\n    \"state\" : \"ACTIVE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/account/614350bcb8eadb0b7e373397",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"account",
+								"614350bcb8eadb0b7e373397"
 							]
 						}
 					},

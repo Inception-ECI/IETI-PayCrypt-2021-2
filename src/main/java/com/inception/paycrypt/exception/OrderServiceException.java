@@ -4,22 +4,26 @@ import com.inception.paycrypt.error.ErrorCodeEnum;
 import com.inception.paycrypt.error.InternalServerErrorException;
 import org.springframework.http.HttpStatus;
 
+/**
+ * Exception for the order services
+ *
+ * @author Daniel Rincón (daniel.rincon-m@mail.escuelaing.edu.co)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class OrderServiceException extends InternalServerErrorException {
 
     /**
-     *
-     * Order not found
+     * Message when the order was not found on the database
      */
-    public static final String ORDEN_NOT_FOUND = "Order not found";
+    public static final String ORDER_NOT_FOUND = "The Order was not found in the records";
 
     /**
      * Constructor
      *
-     * @param message
+     * @param message Message of the Exception
      */
     public OrderServiceException(String message) {
-        super(new ServerErrorResponseDto(message, ErrorCodeEnum.ORDEN_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+        super(new ServerErrorResponseDto(message, ErrorCodeEnum.ORDER_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }
-
-
 }
