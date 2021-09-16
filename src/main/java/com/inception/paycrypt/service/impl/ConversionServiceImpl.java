@@ -38,15 +38,11 @@ public class ConversionServiceImpl implements ConversionService {
     private String currencyUrl;
 
     /**
-     *
-     * @param request request value RequestConversionDto
-     * @return
-     * @throws IOException
+     * {@inheritDoc}
      */
     @Override
     public ResponseConversionDto conversionCurrency(RequestConversionDto request) throws IOException {
         HttpResponse response = requestToApi(request.getSourceCurrency().name(), request.getTargetCurrency().name());
-        System.out.println(response);
         ResponseConversionDto responseConversionDto = null;
         if (response != null) {
             HttpEntity entity = response.getEntity();
@@ -64,10 +60,7 @@ public class ConversionServiceImpl implements ConversionService {
     }
 
     /**
-     *
-     * @param request request value  RequestConversionDto
-     * @return
-     * @throws IOException
+     * {@inheritDoc}
      */
     @Override
     public List<ResponseConversionDto> conversionCurrencyWithMoreCurrency(RequestConversionMore request) throws IOException {
@@ -84,16 +77,15 @@ public class ConversionServiceImpl implements ConversionService {
     }
 
     /**
-     *
-     * @param sourceCurrency
-     * @param targetCurrency
-     * @return
+     * External api request
+     * @param sourceCurrency sourceCurrency to conversion
+     * @param targetCurrency targetCurrency to conversion
+     * @return httpResponse to external api
      */
     private HttpResponse requestToApi(String sourceCurrency, String targetCurrency) {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         HttpResponse response = null;
-        System.out.println(currencyUrl + sourceCurrency.toLowerCase() + "/" + targetCurrency.toLowerCase() + ".json");
         HttpGet request = new HttpGet(currencyUrl + sourceCurrency.toLowerCase() + "/" + targetCurrency.toLowerCase() + ".json");
         try {
             response = httpClient.execute(request);
