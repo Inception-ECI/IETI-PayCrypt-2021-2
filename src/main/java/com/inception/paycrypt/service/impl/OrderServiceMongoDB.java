@@ -26,38 +26,48 @@ import static com.inception.paycrypt.utils.UserRoles.ADMIN;
  * @version 1.0.0
  * @since 1.0.0
  */
-@Component("orderMongoDB")
+@Component("orderServiceMongoDB")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class OrderMongoDB implements OrderService{
+public class OrderServiceMongoDB implements OrderService{
 
     /**
-     *
-     * Order information extraction
+     * The {@link OrderRepository}
      */
     private final OrderRepository orderRepository;
 
     /**
-     * create Order
-     * @param orderDto
-     * @return
+     * {@inheritDoc}
      */
     @Override
-    public Order create(OrderDto orderDto) {
+    public Order create(final OrderDto orderDto) {
+
         return orderRepository.save(new Order(orderDto));
     }
 
     /**
-     * Update of order date
-     * @param orderDto
-     * @param id
-     * @return
+     * {@inheritDoc}
      */
     @Override
-    public Order updateOrderDate(OrderDto orderDto, String id) {
+    public Order findById(final String id) {
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+
+        if (optionalOrder.isPresent()) {
+
+            return optionalOrder.get();
+        }
+
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateOrderDate(final OrderDto orderDto, final String id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
         if(optionalOrder.isPresent()){
             Order order = optionalOrder.get();
-            order.update(orderDto);
+            order.updateExpiration(orderDto.getExpirationDate());
             orderRepository.save(order);
             return order;
         }
@@ -65,82 +75,44 @@ public class OrderMongoDB implements OrderService{
     }
 
     /**
-     * Delete order
-     *
-     * @param id
+     * {@inheritDoc}
      */
     @Override
-    public void deleteOrder(String id) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
+    public Order updateTargetValue(final String orderId, final CurrencyCode targetCurrencyCode) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.updateTarget(targetCurrencyCode);
+            orderRepository.save(order);
+            return order;
+        }
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order updateSourceValue(final String orderId, final CurrencyCode sourceCurrencyCode) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        if(optionalOrder.isPresent()){
+            Order order = optionalOrder.get();
+            order.updateSource(sourceCurrencyCode);
+            orderRepository.save(order);
+            return order;
+        }
+        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteOrder(final String id) {
         if(!orderRepository.existsById(id)){
             throw  new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
         }
         orderRepository.deleteById(id);
     }
 
-    /**
-     * Update of order  by target currecy
-     *
-     * @param orderDto
-     * @param targetCurrencyCode
-     * @return
-     */
-    @Override
-    public Order updateTargetValue(OrderDto orderDto, CurrencyCode targetCurrencyCode) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderDto.getId());
-        if(optionalOrder.isPresent()){
-            Order order = optionalOrder.get();
-            order.update(orderDto);
-            orderRepository.save(order);
-            return order;
-        }
-        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
-    }
-
-    /**
-     *Update of order  by source currency
-     *
-     * @param orderDto
-     * @param sourceCurrencyCode
-     * @return
-     */
-    @Override
-    public Order updateSourcetValue(OrderDto orderDto, CurrencyCode sourceCurrencyCode) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderDto.getId());
-        if(optionalOrder.isPresent()){
-            Order order = optionalOrder.get();
-            order.update(orderDto);
-            orderRepository.save(order);
-            return order;
-        }
-        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
-    }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

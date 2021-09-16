@@ -97,18 +97,16 @@ public class Order {
     /**
      * Update the information of the Order (Target)
      */
-    public void updateTarget(OrderDto orderDto){
-        this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+    public void updateTarget(final CurrencyCode targetCurrencyCode){
+        this.targetCurrencyCode = targetCurrencyCode;
 
     }
 
     /**
      * Update the information of the Order (Source)
      */
-    public void updateSource(OrderDto orderDto){
-        this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
+    public void updateSource(final CurrencyCode sourceCurrencyCode){
+        this.sourceCurrencyCode = sourceCurrencyCode;
     }
-
-
 
 }

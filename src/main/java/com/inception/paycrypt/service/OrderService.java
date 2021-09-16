@@ -6,7 +6,7 @@ import com.inception.paycrypt.model.Order;
 import com.inception.paycrypt.utils.CurrencyCode;
 
 /**
- * Define the signature to implement a Order Service
+ * Define the signature to implement an Order Service
  *
  * @author Laura Bernal
  * @version 1.0.0
@@ -16,32 +16,37 @@ public interface OrderService {
 
     /***
      * Create order
+     *
      * @param orderDto
      * @return
      */
-    Order create(OrderDto orderDto);
+    Order create(final OrderDto orderDto);
+
+    /**
+     * Find by id
+     *
+     * @param id
+     * @return
+     */
+    Order findById(final String id);
 
     /**
      * Update a order
+     *
      * @param orderDto
      * @param id
      * @return
      */
-    Order updateOrderDate (OrderDto orderDto, String id );
-
-    /**
-     * Delete a order
-     * @param id
-     */
-    void deleteOrder(String id);
+    Order updateOrderDate(final OrderDto orderDto, final String id );
 
     /**
      * Update of target currency
+     *
      * @param orderDto
      * @param targetCurrencyCode
      * @return
      */
-    Order updateTargetValue (OrderDto orderDto, CurrencyCode targetCurrencyCode);
+    Order updateTargetValue(final String orderId, final CurrencyCode targetCurrencyCode);
 
     /**
      * Update of sources currency
@@ -50,7 +55,12 @@ public interface OrderService {
      * @param sourceCurrencyCode
      * @return
      */
-    Order updateSourcetValue (OrderDto orderDto, CurrencyCode sourceCurrencyCode);
+    Order updateSourceValue(final String orderId, final CurrencyCode sourceCurrencyCode);
 
+    /**
+     * Delete a order
+     * @param id
+     */
+    void deleteOrder(String id);
 
 }
