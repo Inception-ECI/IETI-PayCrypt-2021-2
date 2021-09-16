@@ -19,7 +19,7 @@ import java.util.Date;
 @Document
 @Getter
 @NoArgsConstructor
-public class PaymentMethod{
+public class PaymentMethod {
 
     /**
      * The PaymentMethod identifier
@@ -57,12 +57,23 @@ public class PaymentMethod{
      *
      * @param paymentMethodDto The {@link PaymentMethodDto} to be mapped
      */
-    public PaymentMethod(PaymentMethodDto paymentMethodDto){
-        this.sourceCurrencyCode=paymentMethodDto.getSourceCurrencyCode();
-        this.targetCurrencyCode=paymentMethodDto.getTargetCurrencyCode();
-        this.fee=paymentMethodDto.getFee();
-        this.creationDate=paymentMethodDto.getCreationDate();
-        this.modificationDate=paymentMethodDto.getModificationDate();
+    public PaymentMethod(PaymentMethodDto paymentMethodDto) {
+        this.sourceCurrencyId = paymentMethodDto.getSourceCurrencyId();
+        this.targetCurrencyId = paymentMethodDto.getTargetCurrencyId();
+        this.fee = paymentMethodDto.getFee();
+        this.creationDate = new Date();
+        this.modificationDate = new Date();
+    }
 
+    /**
+     * Update the information of the Payment Method
+     *
+     * @param paymentMethodDto The {@link PaymentMethodDto} that contains the new information
+     */
+    public void update(PaymentMethodDto paymentMethodDto) {
+        this.sourceCurrencyId = paymentMethodDto.getSourceCurrencyId();
+        this.targetCurrencyId = paymentMethodDto.getTargetCurrencyId();
+        this.fee = paymentMethodDto.getFee();
+        this.modificationDate = new Date();
     }
 }

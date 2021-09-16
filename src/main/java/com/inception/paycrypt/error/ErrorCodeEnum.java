@@ -32,6 +32,11 @@ public enum ErrorCodeEnum {
 	/**
 	 * Invalid user credentials
 	 */
-	INVALID_USER_CREDENTIALS
+	INVALID_USER_CREDENTIALS,
+
+	/**
+	 * Payment Method not found
+	 */
+	PAYMENT_METHOD_NOT_FOUND
 
 }
