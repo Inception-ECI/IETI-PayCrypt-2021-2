@@ -1,7 +1,6 @@
 package com.inception.paycrypt.repository;
 
 import com.inception.paycrypt.model.Account;
-import com.inception.paycrypt.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
