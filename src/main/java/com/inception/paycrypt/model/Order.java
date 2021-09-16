@@ -2,8 +2,10 @@ package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.OrderDto;
 import com.inception.paycrypt.utils.CurrencyCode;
+import com.inception.paycrypt.utils.OrderState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,6 +19,7 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Setter
 @Document
 @NoArgsConstructor
 public class Order {
@@ -53,6 +56,11 @@ public class Order {
     private PaymentMethod paymentMethod;
 
     /**
+     * State of the order
+     */
+    private OrderState orderState;
+
+    /**
      * Date expiration of order
      */
     private Date expirationDate;
@@ -61,6 +69,11 @@ public class Order {
      * Date creation of order
      */
     private Date creationDate;
+
+    /**
+     * The order modification date
+     */
+    private Date modificationDate;
 
     /**
      * Constructor used to map a OrderDto to a Order class
@@ -72,7 +85,9 @@ public class Order {
         this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
         this.expirationDate = orderDto.getExpirationDate();
+        this.orderState = orderDto.getOrderState();
         this.creationDate = new Date();
+        this.modificationDate = new Date();
     }
 
     /**
@@ -84,6 +99,8 @@ public class Order {
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
+        this.orderState = orderDto.getOrderState();
+        this.modificationDate = new Date();
     }
 
 }

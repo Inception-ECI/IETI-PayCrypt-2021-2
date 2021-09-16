@@ -12,17 +12,41 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * Order Service for MongoDB
+ *
+ * @author Daniel Rincón (daniel.rincon-m@mail.escuelaing.edu.co)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Component("orderServiceMongoDB")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OrderServiceMongoDB implements OrderService {
 
+    /**
+     * The {@link OrderRepository}
+     */
     private final OrderRepository orderRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Order create(OrderDto orderDto) {
         return orderRepository.save(new Order(orderDto));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Order update(Order order) {
+        return orderRepository.save(order);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Order findById(String id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
