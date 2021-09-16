@@ -72,26 +72,26 @@ public class OrderController {
      * Update to order by merchant
      *
      * @param orderDto
-     * @param targetCurrencyCode
+     * @param orderId
      * @return update to targetCurrency
      */
-    @PutMapping("/targetCurrencyCode/{targetCurrencyCode}")
+    @PutMapping("/targetCurrencyCode/{orderId}")
     @RolesAllowed(MERCHANT)
-    public ResponseEntity<Order> updateTargetValue(@RequestBody OrderDto orderDto, @PathVariable CurrencyCode targetCurrencyCode) {
-        return ResponseEntity.ok(orderService.updateTargetValue(orderDto.getId(),targetCurrencyCode));
+    public ResponseEntity<Order> updateTargetValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) {
+        return ResponseEntity.ok(orderService.updateTargetValue(orderId,orderDto.getTargetCurrencyCode()));
     }
 
     /**
      * Update to order by user
      *
      * @param orderDto
-     * @param sourceCurrencyCode
+     * @param orderId
      * @return update to sourceCurrency
      */
-    @PutMapping("/sourceCurrencyCode/{sourceCurrencyCode}")
+    @PutMapping("/sourceCurrencyCode/{orderId}")
     @RolesAllowed(USER)
-    public ResponseEntity<Order> updateSourceValue(@RequestBody OrderDto orderDto, @PathVariable CurrencyCode sourceCurrencyCode) {
-        return ResponseEntity.ok(orderService.updateSourceValue(orderDto.getId(),sourceCurrencyCode));
+    public ResponseEntity<Order> updateSourceValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) {
+        return ResponseEntity.ok(orderService.updateSourceValue(orderId,orderDto.getSourceCurrencyCode()));
     }
 
 }

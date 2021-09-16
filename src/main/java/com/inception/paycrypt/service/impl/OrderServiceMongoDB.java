@@ -6,6 +6,7 @@ import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.Order;
 import com.inception.paycrypt.repository.OrderRepository;
 import com.inception.paycrypt.service.OrderService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -60,58 +61,59 @@ public class OrderServiceMongoDB implements OrderService {
     }
 
 
-}  /**
+    /**
      * {@inheritDoc}
      */
     @Override
     public Order updateOrderDate(final OrderDto orderDto, final String id) {
         Optional<Order> optionalOrder = orderRepository.findById(id);
-        if(optionalOrder.isPresent()){
+        if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
             order.updateExpiration(orderDto.getExpirationDate());
             orderRepository.save(order);
             return order;
         }
-        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Order updateTargetValue(final String orderId, final CurrencyCode targetCurrencyCode) {
+    public Order updateTargetValue(String orderId, CurrencyCode targetCurrencyCode) {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if(optionalOrder.isPresent()){
+        if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
             order.updateTarget(targetCurrencyCode);
             orderRepository.save(order);
             return order;
         }
-        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Order updateSourceValue(final String orderId, final CurrencyCode sourceCurrencyCode) {
+    public Order updateSourceValue(String orderId, CurrencyCode sourceCurrencyCode) {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if(optionalOrder.isPresent()){
+        if (optionalOrder.isPresent()) {
             Order order = optionalOrder.get();
             order.updateSource(sourceCurrencyCode);
             orderRepository.save(order);
             return order;
         }
-        throw new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void deleteOrder(final String id) {
-        if(!orderRepository.existsById(id)){
-            throw  new OrderServiceException(OrderServiceException.ORDEN_NOT_FOUND);
+    public void deleteOrder(String id) {
+        if (!orderRepository.existsById(id)) {
+            throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
         }
         orderRepository.deleteById(id);
     }
+}
