@@ -1,8 +1,11 @@
 package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.OrderDto;
+import com.inception.paycrypt.utils.CurrencyCode;
+import com.inception.paycrypt.utils.OrderState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,6 +19,7 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Setter
 @Document
 @NoArgsConstructor
 public class Order {
@@ -29,12 +33,12 @@ public class Order {
     /**
      * Target currency of order
      */
-    private Currency targetCurrency;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Source currency of order
      */
-    private Currency sourceCurrency;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * Target value of order
@@ -52,6 +56,11 @@ public class Order {
     private PaymentMethod paymentMethod;
 
     /**
+     * State of the order
+     */
+    private OrderState orderState;
+
+    /**
      * Date expiration of order
      */
     private Date expirationDate;
@@ -62,27 +71,59 @@ public class Order {
     private Date creationDate;
 
     /**
+     * The order modification date
+     */
+    private Date modificationDate;
+
+    /**
      * Constructor used to map a OrderDto to a Order class
      */
     public Order(OrderDto orderDto){
-        this.id = orderDto.getId();
-        this.targetCurrency = orderDto.getTargetCurrency();
-        this.sourceCurrency = orderDto.getSourceCurrency();
+        this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+        this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
         this.expirationDate = orderDto.getExpirationDate();
-        this.creationDate = orderDto.getCreationDate();
-
+        this.orderState = orderDto.getOrderState();
+        this.creationDate = new Date();
+        this.modificationDate = new Date();
     }
 
     /**
      * Update the information of the Order
      */
-    public void Order(OrderDto orderDto){
-        this.targetCurrency = orderDto.getTargetCurrency();
-        this.sourceCurrency = orderDto.getSourceCurrency();
+    public void update(OrderDto orderDto){
+        this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+        this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
+        this.targetValue = orderDto.getTargetValue();
+        this.sourceValue = orderDto.getSourceValue();
         this.paymentMethod = orderDto.getPaymentMethod();
+        this.orderState = orderDto.getOrderState();
+        this.modificationDate = new Date();
+    }
+
+    /**
+     * Update date expiration
+     */
+    public void updateExpiration(Date expirationDate){
+        this.expirationDate = expirationDate;
+
+    }
+
+    /**
+     * Update the information of the Order (Target)
+     */
+    public void updateTarget(final CurrencyCode targetCurrencyCode){
+        this.targetCurrencyCode = targetCurrencyCode;
+
+    }
+
+    /**
+     * Update the information of the Order (Source)
+     */
+    public void updateSource(final CurrencyCode sourceCurrencyCode){
+        this.sourceCurrencyCode = sourceCurrencyCode;
     }
 
 }

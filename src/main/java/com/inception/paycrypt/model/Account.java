@@ -3,7 +3,8 @@ package com.inception.paycrypt.model;
 import java.util.Date;
 
 import com.inception.paycrypt.dto.AccountDto;
-import com.inception.paycrypt.utils.State;
+import com.inception.paycrypt.utils.AccountState;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -33,9 +34,9 @@ public class Account {
     private String userId;
 
     /**
-     * The currency Id
+     * The currency id
      */
-    private String currencyId;
+    private CurrencyCode currencyCode;
 
     /**
      * the balance of the account
@@ -45,7 +46,7 @@ public class Account {
     /**
      * The account state
      */
-    private String state;
+    private AccountState state;
 
     /**
      * The account creation date
@@ -58,25 +59,47 @@ public class Account {
     private Date modificationDate;
 
     /**
-     * Constructor used to map a AccountDto to a Account class
+     * Constructor used to map a AccountDto to an Account class
+     *
      * @param accountDto The {@link AccountDto} to be mapped
      */
-    public void creationAccount(AccountDto accountDto){
+    public Account(AccountDto accountDto){
         this.userId = accountDto.getUserId();
-        this.currencyId = accountDto.getCurrencyId();
+        this.currencyCode = accountDto.getCurrencyCode();
         this.balance = accountDto.getBalance();
+        this.state = accountDto.getState();
         this.creationDate = new Date();
         this.modificationDate = new Date();
-
     }
 
     /**
      * Method used to update information of the account
+     *
      * @param accountDto The {@link AccountDto} to be mapped
      */
-    public void updateAccount(AccountDto accountDto){
+    public void updateAccount(final AccountDto accountDto){
         this.balance = accountDto.getBalance();
         this.state = accountDto.getState();
-        this.modificationDate = accountDto.getModificationDate();
+        this.modificationDate = new Date();
+    }
+
+    /**
+     * Method used to update information of the account
+     *
+     * @param balance of the account
+     */
+    public void updateBalance(final String balance){
+        this.balance = balance;
+        this.modificationDate = new Date();
+    }
+
+    /**
+     * Method used to update information of the account
+     *
+     * @param state of the account
+     */
+    public void updateState(final AccountState state){
+        this.state = state;
+        this.modificationDate = new Date();
     }
 }

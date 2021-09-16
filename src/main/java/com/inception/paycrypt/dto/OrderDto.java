@@ -1,9 +1,11 @@
 package com.inception.paycrypt.dto;
 
-import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.model.PaymentMethod;
+import com.inception.paycrypt.utils.CurrencyCode;
+import com.inception.paycrypt.utils.OrderState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -15,23 +17,19 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Setter
 @NoArgsConstructor
 public class OrderDto {
 
     /**
-     *  ID orden
-     */
-    private String id;
-
-    /**
      * Target currency of order
      */
-    private Currency targetCurrency;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Source currency of order
      */
-    private Currency sourceCurrency;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * Target value of order
@@ -54,8 +52,12 @@ public class OrderDto {
     private Date expirationDate;
 
     /**
-     * Date creation of order
+     * State of the order
      */
-    private Date creationDate;
+    private OrderState orderState;
 
+    /**
+     * Payment token
+     */
+    private String paymentToken;
 }
