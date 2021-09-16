@@ -1,6 +1,6 @@
-### Inception - PayCrypt
----
-## Integrantes ✒️
+## Inception - PayCrypt 💱💲
+
+### Integrantes ✒️
 
 - Laura Alejandra Bernal Hernández - [lale1507](https://github.com/lale1507)
 - Juan Sebastian Ramos Isaza - [jsr25](https://github.com/Candres1019)
@@ -31,7 +31,7 @@ PayCrypt nace de querer integrar la tecnología blockchain con una plataforma di
 
 ## Modelo Canvas 
 
-[[Canvas]](falta poner vinculo)
+[[Canvas]](https://github.com/Inception-ECI/IETI-PayCrypt-2021-2/blob/feature/readme/Doc/CANVAS%20-%20INCEPTION.pdf)
 
 ## Mockups/Wireframe 💻 📱
 
@@ -39,3 +39,6 @@ PayCrypt nace de querer integrar la tecnología blockchain con una plataforma di
 
 [[Mockup]](https://app.uizard.io/p/b55b2c0e)
 
+## Licencia
+
+Este proyecto está licenciado bajo la GNU v3.0 - ver el archivo [LICENSE](https://github.com/Inception-ECI/IETI-PayCrypt-2021-2/blob/feature/readme/LICENSE) para más detallesbc
