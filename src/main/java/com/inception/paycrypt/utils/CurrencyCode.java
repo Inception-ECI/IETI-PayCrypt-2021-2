@@ -33,9 +33,9 @@ public enum CurrencyCode {
     ETH("Ethereum"),
 
     /**
-     *  The currency code Cardano
+     *  The currency code Litecoin
      */
-    ADA("Cardano"),
+    LTC("Litecoin"),
 
     /**
      *  The currency code Euro

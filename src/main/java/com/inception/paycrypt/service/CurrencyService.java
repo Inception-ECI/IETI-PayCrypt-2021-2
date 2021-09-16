@@ -2,6 +2,7 @@ package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.model.Currency;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,6 +16,14 @@ import org.springframework.stereotype.Service;
 public interface CurrencyService {
 
 	/**
+	 * Find a currency given his code
+	 *
+	 * @param currencyCode The currency code
+	 * @return The currency that has been found
+	 */
+	Currency findByCode(final CurrencyCode currencyCode);
+
+	/**
 	 * Create a Currency
 	 *
 	 * @param currencyDto The {@link CurrencyDto} to be created in the records
@@ -26,16 +35,16 @@ public interface CurrencyService {
 	 * Method to update a {@link Currency}
 	 *
 	 * @param currencyDto The {@link CurrencyDto} with the new information
-	 * @param id          The {@link CurrencyDto} id to be updated in the records
+	 * @param currencyCode          The {@link CurrencyDto} id to be updated in the records
 	 * @return The updated {@link CurrencyDto}
 	 */
-	Currency update(final CurrencyDto currencyDto, final String id);
+	Currency update(final CurrencyDto currencyDto, final CurrencyCode currencyCode);
 
 	/**
 	 * Method to delete a {@link Currency}
 	 *
-	 * @param id The {@link Currency} id to be deleted in the records
+	 * @param currencyCode The {@link Currency} id to be deleted in the records
 	 */
-	void deleteById(final String id);
+	void deleteByCurrencyCode(final CurrencyCode currencyCode);
 
 }

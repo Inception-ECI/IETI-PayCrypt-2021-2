@@ -7,6 +7,7 @@ import com.inception.paycrypt.exception.CurrencyServiceException;
 import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.repository.CurrencyRepository;
 import com.inception.paycrypt.service.CurrencyService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,22 @@ public class CurrencyServiceMongoDB implements CurrencyService {
 	 * {@inheritDoc}
 	 */
 	@Override
+	public Currency findByCode(final CurrencyCode currencyCode) {
+
+		Optional<Currency> optionalCurrency = currencyRepository.findByCurrencyCode(currencyCode);
+
+		if (optionalCurrency.isPresent()) {
+
+			return optionalCurrency.get();
+		}
+
+		throw new CurrencyServiceException(CurrencyServiceException.CURRENCY_NOT_FOUND);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Currency create(final CurrencyDto currencyDto) {
 
 		return currencyRepository.save(new Currency(currencyDto));
@@ -40,9 +57,9 @@ public class CurrencyServiceMongoDB implements CurrencyService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Currency update(final CurrencyDto currencyDto, final String id) {
+	public Currency update(final CurrencyDto currencyDto, final CurrencyCode currencyCode) {
 
-		Optional<Currency> optionalCurrency = currencyRepository.findById(id);
+		Optional<Currency> optionalCurrency = currencyRepository.findByCurrencyCode(currencyCode);
 
 		if (optionalCurrency.isPresent()) {
 			Currency currency = optionalCurrency.get();
@@ -56,15 +73,16 @@ public class CurrencyServiceMongoDB implements CurrencyService {
 
 	/**
 	 * {@inheritDoc}
+	 * @param currencyCode
 	 */
 	@Override
-	public void deleteById(final String id) {
+	public void deleteByCurrencyCode(final CurrencyCode currencyCode) {
 
-		if (!currencyRepository.existsById(id)) {
+		if (!currencyRepository.existsByCurrencyCode(currencyCode)) {
 
 			throw new CurrencyServiceException(CurrencyServiceException.CURRENCY_NOT_FOUND);
 		}
-		currencyRepository.deleteById(id);
+		currencyRepository.deleteByCurrencyCode(currencyCode);
 
 	}
 }

@@ -1,0 +1,366 @@
+{
+	"info": {
+		"_postman_id": "539b962f-1b62-4991-9837-f88144c39e88",
+		"name": "PayCrypt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Currency",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE2NzMzODIsImV4cCI6MTYzMTY3NTE4Mn0.wPsXjFjayLmmVYp2-oxVtJ-RqeLZ9INxuwG3EBiSDVc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currencyCode\" : \"BTC\",\n    \"name\" : \"BitCoin\",\n    \"logo\" : \"LinkToLogo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/currency",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"currency"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE2NzQyNDQsImV4cCI6MTYzMTY3NjA0NH0.boW_t9ZUR3fwe9lJlp0FAhG-eXhI6yoBXuCz2bsfeUo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currencyCode\" : \"BTC\",\n    \"name\" : \"Bitcoin\",\n    \"logo\" : \"NewLinkToLogo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/currency/BTC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"currency",
+								"BTC"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IkFkbWluaXN0cmF0b3IiLCJpYXQiOjE2MzE2NzQyNDQsImV4cCI6MTYzMTY3NjA0NH0.boW_t9ZUR3fwe9lJlp0FAhG-eXhI6yoBXuCz2bsfeUo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/v1/currency/BTC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"currency",
+								"BTC"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"documentType\" : \"CC\",\n    \"documentNumber\" : \"1203168342\",\n    \"email\" : \"user.email@email.com\",\n    \"password\" : \"lacontraseña\",\n    \"userState\" : \"ACTIVE\",\n    \"phone\" : 3174414418,\n    \"country\" : \"CO\",\n    \"name\" : \"name\",\n    \"lastName\" : \"lastname\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateInfo",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE2NzI4ODksImV4cCI6MTYzMTY3NDY4OX0.jmukVpOS86h7PEfnc942phQjtmft3bn27-UXJuXqcms",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"documentType\" : \"CC\",\n    \"documentNumber\" : \"1203168342\",\n    \"email\" : \"user.email.update@email.com\",\n    \"phone\" : 3174414418,\n    \"country\" : \"CO\",\n    \"name\" : \"name\",\n    \"lastName\" : \"lastname\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user/614159a953206d3cafc5560d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user",
+								"614159a953206d3cafc5560d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE2NzI4ODksImV4cCI6MTYzMTY3NDY4OX0.jmukVpOS86h7PEfnc942phQjtmft3bn27-UXJuXqcms",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\" : \"lacontraseña\",\n    \"newPassword\" : \"lanuevacontraseña\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user/password/614159a953206d3cafc5560d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user",
+								"password",
+								"614159a953206d3cafc5560d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateState",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTQxNTlhOTUzMjA2ZDNjYWZjNTU2MGQiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzE2NzMxNzksImV4cCI6MTYzMTY3NDk3OX0.j6YIVJuTB44nPT4G7_uYi6RCAQ5tCxs7scT0wN541rM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userState\" : \"DISABLED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/user/state/614159a953206d3cafc5560d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"user",
+								"state",
+								"614159a953206d3cafc5560d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"user.email.update@email.com\",\r\n    \"password\" : \"lanuevacontraseña\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

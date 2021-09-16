@@ -1,11 +1,14 @@
 package com.inception.paycrypt.controller;
 
+import static com.inception.paycrypt.utils.UserRoles.ADMIN;
+
 import javax.annotation.security.RolesAllowed;
 
 import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.service.CurrencyService;
 import com.inception.paycrypt.service.UserService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +33,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class CurrencyController {
 
 	/**
-	 * Admin Role for Private endpoint
-	 */
-	private static final String ADMIN_ROLE = "Administrator";
-
-	/**
 	 * The {@link UserService}
 	 */
 	private final CurrencyService currencyService;
@@ -46,7 +44,7 @@ public class CurrencyController {
 	 * @return The {@link Currency} saved in the server
 	 */
 	@PostMapping
-	@RolesAllowed(ADMIN_ROLE)
+	@RolesAllowed(ADMIN)
 	public ResponseEntity<Currency> create(@RequestBody CurrencyDto currencyDto) {
 
 		return ResponseEntity.ok(currencyService.create(currencyDto));
@@ -60,10 +58,10 @@ public class CurrencyController {
 	 * @return The {@link Currency} after being updated
 	 */
 	@PutMapping("/{id}")
-	@RolesAllowed(ADMIN_ROLE)
+	@RolesAllowed(ADMIN)
 	public ResponseEntity<Currency> update(@RequestBody CurrencyDto currencyDto, @PathVariable String id) {
 
-		return ResponseEntity.ok(currencyService.update(currencyDto, id));
+		return ResponseEntity.ok(currencyService.update(currencyDto, CurrencyCode.valueOf(id)));
 	}
 
 	/**
@@ -73,10 +71,10 @@ public class CurrencyController {
 	 * @return If the {@link Currency} has been deleted
 	 */
 	@DeleteMapping("/{id}")
-	@RolesAllowed(ADMIN_ROLE)
+	@RolesAllowed(ADMIN)
 	public ResponseEntity<Boolean> delete(@PathVariable String id) {
 
-		currencyService.deleteById(id);
+		currencyService.deleteByCurrencyCode(CurrencyCode.valueOf(id));
 
 		return ResponseEntity.ok(true);
 	}

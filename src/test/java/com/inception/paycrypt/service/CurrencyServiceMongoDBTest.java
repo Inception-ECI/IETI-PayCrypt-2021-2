@@ -5,7 +5,6 @@ import static com.inception.paycrypt.testutils.CurrencyUtils.getValidCurrencyDto
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,6 +14,7 @@ import com.inception.paycrypt.exception.CurrencyServiceException;
 import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.repository.CurrencyRepository;
 import com.inception.paycrypt.service.impl.CurrencyServiceMongoDB;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,19 +58,19 @@ class CurrencyServiceMongoDBTest {
 	@Test
 	void whenValidUpdate_shouldUpdateCurrencyInformation() {
 
-		when(currencyRepository.findById(anyString())).thenReturn(Optional.of(getValidCurrency()));
+		when(currencyRepository.findByCurrencyCode(any(CurrencyCode.class))).thenReturn(Optional.of(getValidCurrency()));
 
-		currencyServiceMongoDB.update(getValidCurrencyDto(), "983d5e23808r0s058d57de91");
+		currencyServiceMongoDB.update(getValidCurrencyDto(), CurrencyCode.BTC);
 		verify(currencyRepository).save(any(Currency.class));
 	}
 
 	@Test
 	void whenCurrencyIdIsNotPresent_shouldThrow_CurrencyNotFoundException() {
 
-		when(currencyRepository.findById(anyString())).thenReturn(Optional.empty());
+		when(currencyRepository.findByCurrencyCode(any(CurrencyCode.class))).thenReturn(Optional.empty());
 
 		CurrencyServiceException currencyServiceException = assertThrows(CurrencyServiceException.class, () -> {
-			currencyServiceMongoDB.update(getValidCurrencyDto(), "123456789");
+			currencyServiceMongoDB.update(getValidCurrencyDto(), CurrencyCode.BTC);
 		});
 
 		assertEquals(CurrencyServiceException.CURRENCY_NOT_FOUND, currencyServiceException.getServerErrorResponseDto().getMessage());
@@ -79,19 +79,19 @@ class CurrencyServiceMongoDBTest {
 	@Test
 	void whenValidDelete_shouldDeleteTheCurrency() {
 
-		when(currencyRepository.existsById(anyString())).thenReturn(true);
+		when(currencyRepository.existsByCurrencyCode(any(CurrencyCode.class))).thenReturn(true);
 
-		currencyServiceMongoDB.deleteById("983d5e23808r0s058d57de91");
-		verify(currencyRepository).deleteById("983d5e23808r0s058d57de91");
+		currencyServiceMongoDB.deleteByCurrencyCode(CurrencyCode.BRL);
+		verify(currencyRepository).deleteByCurrencyCode(CurrencyCode.BRL);
 	}
 
 	@Test
 	void whenCurrencyIdIsNotPresent_andDeleteRequest_shouldThrow_CurrencyNotFoundException() {
 
-		when(currencyRepository.existsById(anyString())).thenReturn(false);
+		when(currencyRepository.existsByCurrencyCode(any(CurrencyCode.class))).thenReturn(false);
 
 		CurrencyServiceException currencyServiceException = assertThrows(CurrencyServiceException.class, () -> {
-			currencyServiceMongoDB.deleteById("123456789");
+			currencyServiceMongoDB.deleteByCurrencyCode(CurrencyCode.BRL);
 		});
 
 		assertEquals(CurrencyServiceException.CURRENCY_NOT_FOUND, currencyServiceException.getServerErrorResponseDto().getMessage());

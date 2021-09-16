@@ -1,6 +1,6 @@
 package com.inception.paycrypt.dto;
 
-import com.inception.paycrypt.model.Currency;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,12 +18,12 @@ public class PaymentMethodDto {
     /**
      * The Source Currency identifier
      */
-    private Currency sourceCurrencyId;
+    private CurrencyCode sourceCurrencyCode;
 
     /**
      * The Target Currency identifier
      */
-    private Currency targetCurrencyId;
+    private CurrencyCode targetCurrencyCode;
 
     /**
      * Percentage of money we are going to charge per transaction made
