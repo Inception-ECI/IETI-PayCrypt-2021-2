@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 1.0.0
  */
 @RestController()
-@RequestMapping("/v1/paymentmethod")
+@RequestMapping("/v1/paymentMethod")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PaymentMethodController {
 
