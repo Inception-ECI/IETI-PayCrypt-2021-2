@@ -2,6 +2,7 @@ package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.AccountDto;
 import com.inception.paycrypt.model.Account;
+import com.inception.paycrypt.utils.AccountState;
 import org.springframework.stereotype.Service;
 
 
@@ -31,18 +32,32 @@ public interface AccountService {
     Account findById (final String id);
 
     /**
-     * Method to update a {@link Account}
+     * Method to update account a {@link Account}
+     * @param accountDto The {@link AccountDto} with the new information
+     * @param accountId The {@link AccountDto} id to be updated in the record
+     * @return The update {@link AccountDto}
+     */
+    Account updateAccount(final AccountDto accountDto, final String accountId);
+
+    /**
+     * Method to update balance of the account a {@link Account}
+     * @param accountDto The {@link AccountDto} with the new information
+     * @param balance The {@link AccountDto} id to be updated in the record
+     * @return The update {@link AccountDto}
+     */
+    Account updateBalance(final AccountDto accountDto, final String balance);
+
+    /**
+     * Method to update state of the account a {@link Account}
+     * @param accountDto The {@link AccountDto} with the new information
+     * @param state The {@link AccountDto} id to be updated in the record
+     * @return The update {@link AccountDto}
+     */
+    Account updateState(final AccountDto accountDto, final AccountState state);
+
+    /**
+     * Method to delete account a {@link Account}
      * @param id The {@link Account} id to be deleted in the records
      */
     void deleteById(final String id);
-
-    /**
-     * Method to update a {@link Account}
-     * @param accountDto The {@link AccountDto} with the new information
-     * @param accountId The {@link AccountDto} id tobe updated in the record
-     * @return The update {@link AccountDto}
-     */
-    Account update(final AccountDto accountDto, final String accountId);
-
-
 }
