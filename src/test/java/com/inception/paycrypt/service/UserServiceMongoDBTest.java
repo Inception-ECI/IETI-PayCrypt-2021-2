@@ -1,7 +1,7 @@
 package com.inception.paycrypt.service;
 
-import static com.inception.paycrypt.testutils.UserDtoUtils.getValidActiveUser;
-import static com.inception.paycrypt.testutils.UserDtoUtils.getValidActiveUserDto;
+import static com.inception.paycrypt.testutils.UserUtils.getValidActiveUser;
+import static com.inception.paycrypt.testutils.UserUtils.getValidActiveUserDto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

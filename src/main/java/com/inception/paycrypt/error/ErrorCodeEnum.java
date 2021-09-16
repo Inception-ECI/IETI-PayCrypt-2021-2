@@ -37,6 +37,11 @@ public enum ErrorCodeEnum {
 	/**
 	 * Orden not found
 	 */
-	ORDEN_NOT_FOUND
+	ORDEN_NOT_FOUND,
+  
+  /*
+	 * Payment Method not found
+	 */
+	PAYMENT_METHOD_NOT_FOUND
 
 }

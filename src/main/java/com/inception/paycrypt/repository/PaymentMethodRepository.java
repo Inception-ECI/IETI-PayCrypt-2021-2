@@ -1,5 +1,6 @@
 package com.inception.paycrypt.repository;
 
+import com.inception.paycrypt.model.PaymentMethod;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -9,5 +10,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @version 1.0.0
  * @since 1.0.0
  */
-public interface PaymentMethod extends MongoRepository<PaymentMethod,String> {
+public interface PaymentMethodRepository extends MongoRepository<PaymentMethod,String> {
 }

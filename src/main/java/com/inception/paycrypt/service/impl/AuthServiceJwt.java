@@ -6,6 +6,7 @@ import com.inception.paycrypt.service.AuthService;
 import com.inception.paycrypt.utils.constants.JwtConstants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import java.util.Date;
  * @version 1.0.0
  * @since 1.0.0
  */
+@Setter
 @Component("authServiceJwt")
 public class AuthServiceJwt implements AuthService {
 
@@ -26,7 +28,7 @@ public class AuthServiceJwt implements AuthService {
      * The secret for the JWT authentication
      */
     @Value("${app.secret}")
-    private String JwtSecret;
+    private String jwtSecret;
 
     /**
      * {@inheritDoc}
@@ -41,7 +43,7 @@ public class AuthServiceJwt implements AuthService {
                 .claim(JwtConstants.CLAIMS_ROLES_KEY, user.getRole())
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate.getTime())
-                .signWith(SignatureAlgorithm.HS256, JwtSecret)
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
 
         return new TokenDto(token, expirationDate.getTime());
