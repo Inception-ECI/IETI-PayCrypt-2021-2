@@ -1,6 +1,8 @@
 package com.inception.paycrypt.dto;
 
 import com.inception.paycrypt.utils.CurrencyCode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +16,9 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class CurrencyDto {
 
     /**
