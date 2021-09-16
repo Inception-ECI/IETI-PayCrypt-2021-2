@@ -14,15 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Authentication Controller
+ *
+ * @author Daniel Rincón (daniel.rincon-m@mail.escuelaing.edu.co)
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @RestController
-@RequestMapping("v1/auth")
+@RequestMapping("/v1/auth")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthController {
 
+    /**
+     * The {@link UserService}
+     */
     private final UserService userService;
 
+    /**
+     * The {@link AuthService}
+     */
     private final AuthService authService;
 
+    /**
+     * The login endpoint
+     *
+     * @param loginDto The credentials provided to authenticate
+     * @return a token if the login was successful
+     */
     @PostMapping
     public TokenDto login(@RequestBody LoginDto loginDto) {
 

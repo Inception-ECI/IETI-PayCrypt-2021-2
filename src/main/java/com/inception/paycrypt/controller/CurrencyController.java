@@ -8,6 +8,7 @@ import com.inception.paycrypt.dto.CurrencyDto;
 import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.service.CurrencyService;
 import com.inception.paycrypt.service.UserService;
+import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -60,7 +61,7 @@ public class CurrencyController {
 	@RolesAllowed(ADMIN)
 	public ResponseEntity<Currency> update(@RequestBody CurrencyDto currencyDto, @PathVariable String id) {
 
-		return ResponseEntity.ok(currencyService.update(currencyDto, id));
+		return ResponseEntity.ok(currencyService.update(currencyDto, CurrencyCode.valueOf(id)));
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class CurrencyController {
 	@RolesAllowed(ADMIN)
 	public ResponseEntity<Boolean> delete(@PathVariable String id) {
 
-		currencyService.deleteById(id);
+		currencyService.deleteByCurrencyCode(CurrencyCode.valueOf(id));
 
 		return ResponseEntity.ok(true);
 	}

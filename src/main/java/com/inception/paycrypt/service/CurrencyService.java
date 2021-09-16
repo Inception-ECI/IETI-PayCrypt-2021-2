@@ -35,16 +35,16 @@ public interface CurrencyService {
 	 * Method to update a {@link Currency}
 	 *
 	 * @param currencyDto The {@link CurrencyDto} with the new information
-	 * @param id          The {@link CurrencyDto} id to be updated in the records
+	 * @param currencyCode          The {@link CurrencyDto} id to be updated in the records
 	 * @return The updated {@link CurrencyDto}
 	 */
-	Currency update(final CurrencyDto currencyDto, final String id);
+	Currency update(final CurrencyDto currencyDto, final CurrencyCode currencyCode);
 
 	/**
 	 * Method to delete a {@link Currency}
 	 *
-	 * @param id The {@link Currency} id to be deleted in the records
+	 * @param currencyCode The {@link Currency} id to be deleted in the records
 	 */
-	void deleteById(final String id);
+	void deleteByCurrencyCode(final CurrencyCode currencyCode);
 
 }

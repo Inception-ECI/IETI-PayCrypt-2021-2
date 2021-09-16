@@ -5,6 +5,7 @@ import java.util.Date;
 import com.inception.paycrypt.dto.UserDto;
 import com.inception.paycrypt.utils.Country;
 import com.inception.paycrypt.utils.DocumentType;
+import com.inception.paycrypt.utils.UserRoles;
 import com.inception.paycrypt.utils.UserState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
  * User class - That is used as Document for MongoDB
@@ -105,9 +107,9 @@ public class User {
 		this.documentType = userDto.getDocumentType();
 		this.documentNumber = userDto.getDocumentNumber();
 		this.email = userDto.getEmail();
-		this.password = userDto.getPassword();
+		this.password = BCrypt.hashpw(userDto.getPassword(), BCrypt.gensalt());
 		this.userState = userDto.getUserState();
-		this.role = userDto.getRole();
+		this.role = UserRoles.USER;
 		this.phone = userDto.getPhone();
 		this.country = userDto.getCountry();
 		this.name = userDto.getName();
@@ -144,8 +146,8 @@ public class User {
 
 		boolean canChangePassword = false;
 
-		if (this.password.equals(oldPassword)) {
-			this.password = newPassword;
+		if (BCrypt.checkpw(oldPassword, this.password)) {
+			this.password = BCrypt.hashpw(newPassword, BCrypt.gensalt());
 			this.modificationDate = new Date();
 			canChangePassword = true;
 		}
