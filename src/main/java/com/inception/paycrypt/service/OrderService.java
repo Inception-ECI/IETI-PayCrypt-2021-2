@@ -5,6 +5,8 @@ import com.inception.paycrypt.model.Order;
 import com.inception.paycrypt.utils.CurrencyCode;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 /**
  * Order services
  *
@@ -21,7 +23,7 @@ public interface OrderService {
      * @param orderDto The data of the order to be created
      * @return The created order
      */
-    Order create(OrderDto orderDto);
+    Order create(OrderDto orderDto) throws IOException;
 
     /**
      * Upate an order in database

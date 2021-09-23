@@ -53,7 +53,7 @@ public class Order {
     /**
      * Payment method of order
      */
-    private PaymentMethod paymentMethod;
+    private String paymentMethodId;
 
     /**
      * State of the order
@@ -83,7 +83,7 @@ public class Order {
         this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
-        this.paymentMethod = orderDto.getPaymentMethod();
+        this.paymentMethodId = orderDto.getPaymentMethodId();
         this.expirationDate = orderDto.getExpirationDate();
         this.orderState = orderDto.getOrderState();
         this.creationDate = new Date();
@@ -98,7 +98,7 @@ public class Order {
         this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
         this.targetValue = orderDto.getTargetValue();
         this.sourceValue = orderDto.getSourceValue();
-        this.paymentMethod = orderDto.getPaymentMethod();
+        this.paymentMethodId = orderDto.getPaymentMethodId();
         this.orderState = orderDto.getOrderState();
         this.modificationDate = new Date();
     }

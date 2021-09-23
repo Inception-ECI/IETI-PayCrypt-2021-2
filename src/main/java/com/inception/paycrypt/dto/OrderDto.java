@@ -44,7 +44,7 @@ public class OrderDto {
     /**
      * Payment method of order
      */
-    private PaymentMethod paymentMethod;
+    private String paymentMethodId;
 
     /**
      * Date expiration of order

@@ -35,13 +35,9 @@ public class OrderController {
      * @return Order
      */
     @PostMapping
+    @RolesAllowed(MERCHANT)
     public ResponseEntity<Order> create(@RequestBody OrderDto orderDto){
-        try{
-            return new ResponseEntity<>(orderService.create(orderDto),HttpStatus.OK);
-        } catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(orderService.create(orderDto),HttpStatus.OK);
     }
 
     /**
@@ -75,7 +71,7 @@ public class OrderController {
      * @param orderId
      * @return update to targetCurrency
      */
-    @PutMapping("/targetCurrencyCode/{orderId}")
+    @PutMapping("/target/{orderId}")
     @RolesAllowed(MERCHANT)
     public ResponseEntity<Order> updateTargetValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) {
         return ResponseEntity.ok(orderService.updateTargetValue(orderId,orderDto.getTargetCurrencyCode()));
@@ -88,7 +84,7 @@ public class OrderController {
      * @param orderId
      * @return update to sourceCurrency
      */
-    @PutMapping("/sourceCurrencyCode/{orderId}")
+    @PutMapping("/source/{orderId}")
     @RolesAllowed(USER)
     public ResponseEntity<Order> updateSourceValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) {
         return ResponseEntity.ok(orderService.updateSourceValue(orderId,orderDto.getSourceCurrencyCode()));

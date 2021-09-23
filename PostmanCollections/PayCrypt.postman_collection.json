@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "539b962f-1b62-4991-9837-f88144c39e88",
+		"_postman_id": "75cdb8ae-e6f6-4728-be90-d638791a97ab",
 		"name": "PayCrypt",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -642,6 +642,40 @@
 								"v1",
 								"account",
 								"614350bcb8eadb0b7e373397"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "OrderPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"targetCurrencyCode\" : \"BTC\",\r\n    \"sourceCurrencyCode\" : \"USD\",\r\n    \"targetValue\" : \"2\",\r\n    \"paymentMethodId\" : \"614bc83e1663f902fc9e3cba\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"order"
 							]
 						}
 					},
