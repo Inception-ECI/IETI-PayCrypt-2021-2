@@ -75,17 +75,6 @@ public class Account {
     /**
      * Method used to update information of the account
      *
-     * @param accountDto The {@link AccountDto} to be mapped
-     */
-    public void updateAccount(final AccountDto accountDto){
-        this.balance = accountDto.getBalance();
-        this.state = accountDto.getState();
-        this.modificationDate = new Date();
-    }
-
-    /**
-     * Method used to update information of the account
-     *
      * @param balance of the account
      */
     public void updateBalance(final String balance){

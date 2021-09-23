@@ -4,6 +4,7 @@ import com.inception.paycrypt.utils.AccountState;
 import com.inception.paycrypt.utils.CurrencyCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Setter
 @NoArgsConstructor
 public class AccountDto {
 

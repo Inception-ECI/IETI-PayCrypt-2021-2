@@ -2,8 +2,11 @@ package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.TransactionDto;
 import com.inception.paycrypt.utils.TransactionState;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,8 +20,11 @@ import java.util.Date;
  * @since 1.0.0
  */
 @Getter
+@Setter
+@Builder
 @Document
 @NoArgsConstructor
+@AllArgsConstructor
 public class Transaction {
 
     /**
