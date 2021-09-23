@@ -1,10 +1,15 @@
 package com.inception.paycrypt.service.impl;
 
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Optional;
+
 import com.inception.paycrypt.dto.OrderDto;
 import com.inception.paycrypt.dto.RequestConversionDto;
 import com.inception.paycrypt.exception.OrderServiceException;
 import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.Order;
+import com.inception.paycrypt.model.PaymentMethod;
 import com.inception.paycrypt.repository.OrderRepository;
 import com.inception.paycrypt.service.OrderService;
 import com.inception.paycrypt.utils.CurrencyCode;
@@ -12,11 +17,6 @@ import com.inception.paycrypt.utils.OrderState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
 
 /**
  * Order Service for MongoDB
@@ -28,116 +28,151 @@ import java.util.Optional;
 @Component("orderServiceMongoDB")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OrderServiceMongoDB implements OrderService {
-    private final static int DEFAULT_ORDER_EXPIRATION_MINUTE=5;
 
-    /**
-     * The {@link OrderRepository}
-     */
-    private final OrderRepository orderRepository;
+	/**
+	 *
+	 */
+	private static final int DEFAULT_ORDER_EXPIRATION_MINUTE = 5;
 
-    /**
-     * The {@link ConversionServiceImpl} to convert currencies
-     */
-    private final ConversionServiceImpl conversionService;
+	/**
+	 * The {@link OrderRepository}
+	 */
+	private final OrderRepository orderRepository;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order create(OrderDto orderDto) throws IOException {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE,DEFAULT_ORDER_EXPIRATION_MINUTE);
-        orderDto.setExpirationDate(calendar.getTime());
-        orderDto.setOrderState(OrderState.IN_PROGRESS);
-        orderDto.setSourceValue(conversionCurrency(orderDto));
-        return orderRepository.save(new Order(orderDto));
-    }
+	/**
+	 * The {@link ConversionServiceImpl} to convert currencies
+	 */
+	private final ConversionServiceImpl conversionService;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order update(Order order) {
-        return orderRepository.save(order);
-    }
+	/**
+	 * The {@link PaymentMethodServiceMongoDB}
+	 */
+	private final PaymentMethodServiceMongoDB paymentMethodService;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order findById(String id) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order create(OrderDto orderDto) throws IOException {
 
-        if (optionalOrder.isPresent()) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
+		orderDto.setExpirationDate(calendar.getTime());
+		orderDto.setOrderState(OrderState.IN_PROGRESS);
+		orderDto.setSourceValue(conversionCurrency(orderDto));
+		return orderRepository.save(new Order(orderDto));
+	}
 
-            return optionalOrder.get();
-        }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order update(Order order) {
 
-        throw new UserServiceException(OrderServiceException.ORDER_NOT_FOUND);
-    }
+		return orderRepository.save(order);
+	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order findById(String id) {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order updateOrderDate(final OrderDto orderDto, final String id) {
-        Optional<Order> optionalOrder = orderRepository.findById(id);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.updateExpiration(orderDto.getExpirationDate());
-            orderRepository.save(order);
-            return order;
-        }
-        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
-    }
+		Optional<Order> optionalOrder = orderRepository.findById(id);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order updateTargetValue(String orderId, CurrencyCode targetCurrencyCode) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.updateTarget(targetCurrencyCode);
-            orderRepository.save(order);
-            return order;
-        }
-        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
-    }
+		if (optionalOrder.isPresent()) {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Order updateSourceValue(String orderId, CurrencyCode sourceCurrencyCode) {
-        Optional<Order> optionalOrder = orderRepository.findById(orderId);
-        if (optionalOrder.isPresent()) {
-            Order order = optionalOrder.get();
-            order.updateSource(sourceCurrencyCode);
-            orderRepository.save(order);
-            return order;
-        }
-        throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
-    }
+			return optionalOrder.get();
+		}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void deleteOrder(String id) {
-        if (!orderRepository.existsById(id)) {
-            throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
-        }
-        orderRepository.deleteById(id);
-    }
+		throw new UserServiceException(OrderServiceException.ORDER_NOT_FOUND);
+	}
 
-    private String conversionCurrency(OrderDto orderDto) throws IOException {
-        RequestConversionDto requestConversion = new RequestConversionDto();
-        requestConversion.setSourceCurrency(orderDto.getTargetCurrencyCode());
-        requestConversion.setTargetCurrency(orderDto.getSourceCurrencyCode());
-        requestConversion.setSourceValue(Double.parseDouble(orderDto.getTargetValue()));
-        return conversionService.conversionCurrency(requestConversion).getValue().toString();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order updateOrderDate(final String orderId) {
+
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+		if (optionalOrder.isPresent()) {
+			Order order = optionalOrder.get();
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
+			order.setExpirationDate(calendar.getTime());
+			orderRepository.save(order);
+			return order;
+		}
+
+		throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order updateTargetValue(String orderId, OrderDto orderDto) throws IOException {
+
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+
+		if (optionalOrder.isPresent()) {
+			Order order = optionalOrder.get();
+			PaymentMethod paymentMethod = paymentMethodService
+					.findBySourceAndTargetCurrencyCode(order.getSourceCurrencyCode(), orderDto.getTargetCurrencyCode());
+			order.updateTarget(orderDto);
+			orderDto.setSourceCurrencyCode(order.getSourceCurrencyCode());
+			order.setSourceValue(conversionCurrency(orderDto));
+			order.setPaymentMethodId(paymentMethod.getId());
+			orderRepository.save(order);
+
+			return order;
+		}
+
+		throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order updateSourceValue(String orderId, OrderDto orderDto) throws IOException {
+
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+
+		if (optionalOrder.isPresent()) {
+			Order order = optionalOrder.get();
+			PaymentMethod paymentMethod = paymentMethodService
+					.findBySourceAndTargetCurrencyCode(orderDto.getSourceCurrencyCode(), order.getTargetCurrencyCode());
+			order.updateSource(orderDto);
+			orderDto.setTargetCurrencyCode(order.getTargetCurrencyCode());
+			orderDto.setTargetValue(order.getTargetValue());
+			order.setSourceValue(conversionCurrency(orderDto));
+			order.setPaymentMethodId(paymentMethod.getId());
+			orderRepository.save(order);
+
+			return order;
+		}
+
+		throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
+	}
+
+	/**
+	 * @param orderDto The {@link OrderDto} where the conversion is made
+	 * @return The Conversion value
+	 * @throws IOException The {@link IOException}
+	 */
+	private String conversionCurrency(OrderDto orderDto) throws IOException {
+
+		RequestConversionDto requestConversion = new RequestConversionDto();
+		requestConversion.setSourceCurrency(orderDto.getTargetCurrencyCode());
+		requestConversion.setTargetCurrency(CurrencyCode.USD);
+		requestConversion.setSourceValue(Double.parseDouble(orderDto.getTargetValue()));
+
+		requestConversion.setSourceValue(Double.parseDouble(conversionService.conversionCurrency(requestConversion).getValue().toString()));
+		requestConversion.setSourceCurrency(CurrencyCode.USD);
+		requestConversion.setTargetCurrency(orderDto.getSourceCurrencyCode());
+
+		return conversionService.conversionCurrency(requestConversion).getValue().toString();
+	}
+
 }
