@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar build/libs/paycrypt-1.2.0.jar
