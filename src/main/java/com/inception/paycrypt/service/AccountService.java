@@ -31,14 +31,6 @@ public interface AccountService {
     Account findById (final String id);
 
     /**
-     * Method to update account a {@link Account}
-     * @param accountDto The {@link AccountDto} with the new information
-     * @param accountId The {@link AccountDto} id to be updated in the record
-     * @return The update {@link AccountDto}
-     */
-    Account updateAccount(final AccountDto accountDto, final String accountId);
-
-    /**
      * Method to update balance of the account a {@link Account}
      * @param id The {@link AccountDto} with the new information
      * @param balance The {@link AccountDto} id to be updated in the record
@@ -50,9 +42,10 @@ public interface AccountService {
      * Method to update state of the account a {@link Account}
      * @param id The {@link AccountDto} with the new information
      * @param state The {@link AccountDto} id to be updated in the record
+     * @param token The token
      * @return The update {@link AccountDto}
      */
-    Account updateState(final String id, final AccountState state);
+    Account updateState(final String id, final AccountState state, String token);
 
     /**
      * Method to delete account a {@link Account}

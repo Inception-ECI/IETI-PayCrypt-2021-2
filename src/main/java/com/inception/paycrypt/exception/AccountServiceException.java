@@ -18,8 +18,20 @@ public class AccountServiceException extends InternalServerErrorException {
      */
     public static final String ACCOUNT_NOT_FOUND = "The Account is not found in the records";
 
-    public AccountServiceException(String message){
+    /**
+     * User not authorized
+     */
+    public static final String AUTHORIZATION_ERROR = "The account does not belong to user";
 
-        super(new ServerErrorResponseDto(message, ErrorCodeEnum.ACCOUNT_NOT_FOUND, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    /**
+     * Constructor
+     *
+     * @param message Message
+     * @param errorCode The {@link ErrorCodeEnum}
+     * @param httpStatus The {@link HttpStatus}
+     */
+    public AccountServiceException(String message, ErrorCodeEnum errorCode, HttpStatus httpStatus){
+
+        super(new ServerErrorResponseDto(message, errorCode, httpStatus), httpStatus);
     }
 }

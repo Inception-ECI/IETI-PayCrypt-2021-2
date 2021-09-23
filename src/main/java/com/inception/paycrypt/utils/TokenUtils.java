@@ -2,12 +2,24 @@ package com.inception.paycrypt.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.xml.bind.DatatypeConverter;
 
+/**
+ * Utils for tokens
+ *
+ * @author Daniel Rincón
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class TokenUtils {
 
+    /**
+     * Extracts user id from token
+     *
+     * @param token The token
+     * @return The user id
+     */
     public static String extractUserId(String token) {
 
         String JWT_TEST_SECRET = System.getenv("SECRET");

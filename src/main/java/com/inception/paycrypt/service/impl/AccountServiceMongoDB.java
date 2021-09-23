@@ -1,13 +1,16 @@
 package com.inception.paycrypt.service.impl;
 
 import com.inception.paycrypt.dto.AccountDto;
+import com.inception.paycrypt.error.ErrorCodeEnum;
 import com.inception.paycrypt.exception.AccountServiceException;
 import com.inception.paycrypt.model.Account;
 import com.inception.paycrypt.repository.AccountRepository;
 import com.inception.paycrypt.service.AccountService;
 import com.inception.paycrypt.utils.AccountState;
+import com.inception.paycrypt.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -48,32 +51,14 @@ public class AccountServiceMongoDB implements AccountService {
             return optionalAccount.get();
         }
 
-        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Account updateAccount(final AccountDto accountDto, final String accountId) {
-
-        Optional<Account> optionalAccount = accountRepository.findById(accountId);
-
-        if (optionalAccount.isPresent()) {
-            Account account = optionalAccount.get();
-            account.updateAccount(accountDto);
-            accountRepository.save(account);
-            return account;
-        }
-
-        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Account updateBalance(final  String id, final String balance) {
+    public Account updateBalance(final String id, final String balance) {
 
         Optional<Account> optionalBalance = accountRepository.findById(id);
 
@@ -84,25 +69,26 @@ public class AccountServiceMongoDB implements AccountService {
             return account;
         }
 
-        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.NOT_FOUND);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Account updateState(final String id, final AccountState state) {
+    public Account updateState(final String id, final AccountState state, final String token) {
 
-        Optional<Account> optionalState = accountRepository.findById(id);
+        Optional<Account> optionalAccount = accountRepository.findById(id);
 
-        if (optionalState.isPresent()) {
-            Account account = optionalState.get();
+        if (optionalAccount.isPresent()) {
+            Account account = optionalAccount.get();
+            validateAccountOwner(account.getUserId(), TokenUtils.extractUserId(token));
             account.updateState(state);
             accountRepository.save(account);
             return account;
         }
 
-        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -110,9 +96,21 @@ public class AccountServiceMongoDB implements AccountService {
      */
     @Override
     public void deleteById(final String id) {
-        if(!accountRepository.existsById(id)){
-            throw  new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND);
+        if (!accountRepository.existsById(id)) {
+            throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.NOT_FOUND);
         }
         accountRepository.deleteById(id);
+    }
+
+    /**
+     * Validate if account belongs to owner
+     *
+     * @param accountUserId The account user id
+     * @param tokenUserId The token account
+     */
+    private void validateAccountOwner(String accountUserId, String tokenUserId) {
+        if (!accountUserId.equals(tokenUserId)) {
+            throw new AccountServiceException(AccountServiceException.AUTHORIZATION_ERROR, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.FORBIDDEN);
+        }
     }
 }
