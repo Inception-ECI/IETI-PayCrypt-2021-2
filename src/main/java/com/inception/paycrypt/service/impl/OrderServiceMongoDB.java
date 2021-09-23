@@ -2,6 +2,7 @@ package com.inception.paycrypt.service.impl;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 import com.inception.paycrypt.dto.OrderDto;
@@ -10,10 +11,12 @@ import com.inception.paycrypt.exception.OrderServiceException;
 import com.inception.paycrypt.exception.UserServiceException;
 import com.inception.paycrypt.model.Order;
 import com.inception.paycrypt.model.PaymentMethod;
+import com.inception.paycrypt.model.Transaction;
 import com.inception.paycrypt.repository.OrderRepository;
 import com.inception.paycrypt.service.OrderService;
 import com.inception.paycrypt.utils.CurrencyCode;
 import com.inception.paycrypt.utils.OrderState;
+import com.inception.paycrypt.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -50,17 +53,41 @@ public class OrderServiceMongoDB implements OrderService {
 	private final PaymentMethodServiceMongoDB paymentMethodService;
 
 	/**
+	 * The {@link TransactionServiceMongoDB}
+	 */
+	private final TransactionServiceMongoDB transactionService;
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Order create(OrderDto orderDto) throws IOException {
+	public Order create(String token, OrderDto orderDto) throws IOException {
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
 		orderDto.setExpirationDate(calendar.getTime());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
 		orderDto.setSourceValue(conversionCurrency(orderDto));
-		return orderRepository.save(new Order(orderDto));
+		Order order = orderRepository.save(new Order(orderDto));
+		transactionService.create(Transaction.builder()
+						 .orderId(order.getId())
+						 .creationDate(new Date())
+						 .targetUserId(TokenUtils.extractUserId(token))
+						 .build());
+		return order;
+	}
+
+	@Override
+	public Order create(final OrderDto orderDto) throws IOException {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
+		orderDto.setExpirationDate(calendar.getTime());
+		orderDto.setOrderState(OrderState.IN_PROGRESS);
+		orderDto.setSourceValue(conversionCurrency(orderDto));
+		Order order = orderRepository.save(new Order(orderDto));
+
+		return order;
 	}
 
 	/**

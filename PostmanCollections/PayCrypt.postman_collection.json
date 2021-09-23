@@ -363,7 +363,7 @@
 			]
 		},
 		{
-			"name": "Payment Link",
+			"name": "Payment",
 			"item": [
 				{
 					"name": "generate",
@@ -411,13 +411,53 @@
 					"response": []
 				},
 				{
-					"name": "Pay",
+					"name": "PayLink",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"paymentToken\" : \"6143602ca1b2791aa48f490f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/payment/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"payment",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PayOrder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTRiYzY5ZDE2NjNmOTAyZmM5ZTNjYjQiLCJyb2xlcyI6IlVzZXIiLCJpYXQiOjE2MzIzNzIwMjUsImV4cCI6MTYzMjM3MzgyNX0.SIzFhZfBP9mSPlb0Q9zquGijj5dw2W9-exai7NvJAck",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paymentToken\" : \"614c05af324ddb500581f546\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -537,7 +577,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTRiYzZjYTE2NjNmOTAyZmM5ZTNjYjUiLCJyb2xlcyI6Ik1lcmNoYW50IiwiaWF0IjoxNjMyMzY1MzM0LCJleHAiOjE2MzIzNjcxMzR9.-7iaSTf-J3JhB5_iefsOHMwWKdntl47m9DjX8R7UA0o",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTRiYzZjYTE2NjNmOTAyZmM5ZTNjYjUiLCJyb2xlcyI6Ik1lcmNoYW50IiwiaWF0IjoxNjMyMzcxNzMzLCJleHAiOjE2MzIzNzM1MzN9.Y-zbdj4i--peJcVHbX3e98SHlj8FOODuOPVFQpZBYes",
 									"type": "string"
 								}
 							]

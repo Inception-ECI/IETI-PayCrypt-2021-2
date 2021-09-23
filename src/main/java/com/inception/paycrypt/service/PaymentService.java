@@ -13,7 +13,7 @@ import java.io.IOException;
  * @since 1.0.0
  */
 @Service
-public interface PaymentLinkService {
+public interface PaymentService {
 
     /**
      * Generate a token to be used in the payment endpont
@@ -30,5 +30,7 @@ public interface PaymentLinkService {
      * @param paymentToken The token related to the order
      * @return if the order could be paid successfully
      */
-    boolean pay(String paymentToken);
+    boolean payLink(String paymentToken);
+
+    boolean payOrder(String token, String orderId);
 }

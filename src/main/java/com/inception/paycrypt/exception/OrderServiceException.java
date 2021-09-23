@@ -19,6 +19,11 @@ public class OrderServiceException extends InternalServerErrorException {
     public static final String ORDER_NOT_FOUND = "The Order was not found in the records";
 
     /**
+     * Message when the order was not found on the database
+     */
+    public static final String ORDER_TRANSACTION_NOT_FOUND = "The transaction with the given order was not found in the records";
+
+    /**
      * Constructor
      *
      * @param message Message of the Exception

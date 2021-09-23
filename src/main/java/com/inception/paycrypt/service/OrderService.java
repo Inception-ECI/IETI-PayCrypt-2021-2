@@ -22,6 +22,8 @@ public interface OrderService {
 	 * @param orderDto The data of the order to be created
 	 * @return The created order
 	 */
+	Order create(String token, OrderDto orderDto) throws IOException;
+
 	Order create(OrderDto orderDto) throws IOException;
 
 	/**
