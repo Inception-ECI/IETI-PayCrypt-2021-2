@@ -42,7 +42,7 @@ public enum ErrorCodeEnum {
   	/*
 	 * account not found
 	 */
-	ACCOUNT_NOT_FOUND,
+	ACCOUNT_SERVICE_ERROR,
 
   	/**
 	 * Payment Method not found

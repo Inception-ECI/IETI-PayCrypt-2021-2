@@ -2,6 +2,7 @@ package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.PaymentMethodDto;
 import com.inception.paycrypt.model.PaymentMethod;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,8 @@ public interface PaymentMethodService {
      * @return The Payment Method that is now in the records
      */
     PaymentMethod create(PaymentMethodDto paymentMethodDto);
+
+    PaymentMethod findBySourceAndTargetCurrencyCode(CurrencyCode source, CurrencyCode target);
 
     /**
      * Update a user if given the User id
