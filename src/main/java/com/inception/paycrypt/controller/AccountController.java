@@ -13,10 +13,13 @@ import javax.annotation.security.RolesAllowed;
 
 import static com.inception.paycrypt.utils.UserRoles.*;
 
+import java.util.List;
+
 /**
  * Account Controller
  *
  * @author Paula Guevara
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
@@ -44,6 +47,18 @@ public class AccountController {
     }
 
     /**
+     * Get all account from the logged user
+     *
+     * @return The list of {@link Account} saved in the server
+     */
+    @GetMapping("/all")
+    @RolesAllowed({USER, MERCHANT})
+    public ResponseEntity<List<Account>> getAllAccounts(@RequestHeader("Authorization") String authorization) {
+
+        return ResponseEntity.ok(accountService.getAllAccountsByUserid(TokenUtils.extractUserId(authorization.split(" ")[1])));
+    }
+
+    /**
      * Account state update endpoint
      *
      * @param accountDto The {@link AccountDto} to be updated
@@ -64,7 +79,7 @@ public class AccountController {
      * @return if the {@link Account} has been deleted
      */
     @DeleteMapping("/{accountId}")
-    @RolesAllowed(ADMIN)
+    @RolesAllowed({USER, MERCHANT})
     public ResponseEntity<Boolean> delete(@PathVariable String accountId) {
         accountService.deleteById(accountId);
         return ResponseEntity.ok(Boolean.TRUE);

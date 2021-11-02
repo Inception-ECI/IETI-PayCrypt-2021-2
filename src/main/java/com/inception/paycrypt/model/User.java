@@ -166,4 +166,8 @@ public class User {
 		this.modificationDate = new Date();
 	}
 
+	public void cleanSensitiveData() {
+		this.password = "";
+	}
+
 }
