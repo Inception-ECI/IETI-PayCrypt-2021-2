@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
  * Define the signature to implement a {@link AccountService} using MongoDB
  *
  * @author Paula Guevara
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
@@ -37,6 +39,21 @@ public class AccountServiceMongoDB implements AccountService {
     @Override
     public Account create(final AccountDto accountDto) {
         return accountRepository.save(new Account(accountDto));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Account> getAllAccountsByUserid(final String userId) {
+
+        Optional<List<Account>> optionalAccounts = accountRepository.findByUserId(userId);
+
+        if (optionalAccounts.isPresent()) {
+            return optionalAccounts.get();
+        }
+
+        throw new AccountServiceException(AccountServiceException.ACCOUNT_NOT_FOUND, ErrorCodeEnum.ACCOUNT_SERVICE_ERROR, HttpStatus.NOT_FOUND);
     }
 
     /**
