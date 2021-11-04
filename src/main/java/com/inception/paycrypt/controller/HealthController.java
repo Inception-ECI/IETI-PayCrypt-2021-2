@@ -1,5 +1,6 @@
 package com.inception.paycrypt.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0.0
  * @since 1.0.0
  */
+@CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/health")
 public class HealthController {

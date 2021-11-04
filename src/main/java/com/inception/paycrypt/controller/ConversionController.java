@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import java.util.List;
  * @version 1.0.0
  * @since 1.0.0
  */
+@CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/conversion")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

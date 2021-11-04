@@ -6,6 +6,8 @@ import com.inception.paycrypt.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0.0
  * @since 1.0.0
  */
+@CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/user")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -40,6 +43,14 @@ public class UserController {
 	public ResponseEntity<User> create(@RequestBody UserDto userDto) {
 
 		return ResponseEntity.ok(userService.create(userDto));
+	}
+
+	@GetMapping("/{email}")
+	public ResponseEntity<User> getUserInfo(@PathVariable String email) {
+
+		User user = userService.findByEmail(email);
+		user.cleanSensitiveData();
+		return ResponseEntity.ok(user);
 	}
 
 	/**
