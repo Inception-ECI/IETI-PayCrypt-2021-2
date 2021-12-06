@@ -1,6 +1,5 @@
 package com.inception.paycrypt.dto;
 
-import com.inception.paycrypt.model.PaymentMethod;
 import com.inception.paycrypt.utils.CurrencyCode;
 import com.inception.paycrypt.utils.OrderState;
 import lombok.Getter;
@@ -20,6 +19,11 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 public class OrderDto {
+
+    /**
+     * The order id
+     */
+    private String id;
 
     /**
      * Target currency of order
