@@ -12,23 +12,19 @@ import com.inception.paycrypt.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * User Controller
  *
  * @author Laura Bernal
+ * @author Andres Calderon (andres.calderon@mail.escuelaing.edu.co)
  * @version 1.0.0
  * @since 1.0.0
  */
 @RestController
 @RequestMapping("/v1/order")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class OrderController {
 
@@ -48,6 +44,19 @@ public class OrderController {
 	public ResponseEntity<Order> create(@RequestBody OrderDto orderDto, @RequestHeader("Authorization") String authorization) throws IOException {
 
 		return ResponseEntity.ok(orderService.create(authorization.split(" ")[1], orderDto));
+	}
+
+	/**
+	 * Get order by id
+	 *
+	 * @param orderDto where the id is extracted
+	 * @param id
+	 * @return Order
+	 */
+	@GetMapping("/{id}")
+	public ResponseEntity<Order> getOrderById(@PathVariable String id) throws IOException {
+
+		return ResponseEntity.ok(orderService.findById(id));
 	}
 
 	/**

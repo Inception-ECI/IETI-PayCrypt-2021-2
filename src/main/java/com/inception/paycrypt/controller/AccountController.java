@@ -25,6 +25,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/v1/account")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountController {
 
