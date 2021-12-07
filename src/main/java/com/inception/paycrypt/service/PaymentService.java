@@ -23,7 +23,7 @@ public interface PaymentService {
      * @return The generated token
      * @throws IOException When can't convert currencies
      */
-    String generateToken(OrderDto orderDto) throws IOException;
+    String generateToken(String authorization, OrderDto orderDto) throws IOException;
 
     boolean payOrder(String token, String orderId);
 

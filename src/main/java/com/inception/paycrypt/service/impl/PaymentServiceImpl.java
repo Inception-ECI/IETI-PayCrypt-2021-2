@@ -54,12 +54,12 @@ public class PaymentServiceImpl implements PaymentService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String generateToken(OrderDto orderDto) throws IOException {
+	public String generateToken(String authorization, OrderDto orderDto) throws IOException {
 
 		Account account = accountService.findById(orderDto.getTargetAccount());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
 		orderDto.setTargetCurrencyCode(account.getCurrencyCode());
-		Order order = orderService.create(orderDto);
+		Order order = orderService.create(authorization, orderDto);
 
 		return order.getId();
 	}

@@ -39,7 +39,7 @@ public class TransactionServiceMongoDB implements TransactionService {
 
 	@Override
 	public List<Transaction> getAllTransactionsByUserid(String sourceUserId) {
-		Optional<List<Transaction>> optionalTransactions = transactionRepository.findAllBySourceUserId(sourceUserId);
+		Optional<List<Transaction>> optionalTransactions = transactionRepository.findAllBySourceUserIdOrTargetUserId(sourceUserId, sourceUserId);
 
 		if (optionalTransactions.isPresent()) {
 

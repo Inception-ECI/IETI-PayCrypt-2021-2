@@ -38,9 +38,9 @@ public class PaymentController {
 	 * @throws IOException When can't convert between currencies
 	 */
 	@PostMapping("/link")
-	public ResponseEntity<String> createPaymentLink(@RequestBody OrderDto orderDto) throws IOException {
+	public ResponseEntity<String> createPaymentLink(@RequestBody OrderDto orderDto, @RequestHeader("Authorization") String authorization) throws IOException {
 
-		return ResponseEntity.ok(paymentService.generateToken(orderDto));
+		return ResponseEntity.ok(paymentService.generateToken(authorization.split(" ")[1], orderDto));
 	}
 
 	@PostMapping("/pay")
