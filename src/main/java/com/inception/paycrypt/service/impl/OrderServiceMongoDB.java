@@ -67,7 +67,6 @@ public class OrderServiceMongoDB implements OrderService {
 		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
 		orderDto.setExpirationDate(calendar.getTime());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
-		orderDto.setSourceValue(conversionCurrency(orderDto));
 		Order order = orderRepository.save(new Order(orderDto));
 		transactionService.create(Transaction.builder()
 						 .orderId(order.getId())
@@ -84,7 +83,6 @@ public class OrderServiceMongoDB implements OrderService {
 		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
 		orderDto.setExpirationDate(calendar.getTime());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
-		orderDto.setSourceValue(conversionCurrency(orderDto));
 		Order order = orderRepository.save(new Order(orderDto));
 
 		return order;
