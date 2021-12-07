@@ -43,22 +43,17 @@ public class PaymentController {
 		return ResponseEntity.ok(paymentService.generateToken(orderDto));
 	}
 
-	/**
-	 * Endpoint to pay an order
-	 *
-	 * @param orderDto The token of the order to pay
-	 * @return if the order was paid successfully
-	 */
-	@PostMapping("/link/pay")
-	public ResponseEntity<Boolean> payLink(@RequestBody OrderDto orderDto) {
-
-		return ResponseEntity.ok(paymentService.payLink(orderDto.getPaymentToken()));
-	}
-
 	@PostMapping("/pay")
 	@RolesAllowed(USER)
 	public ResponseEntity<Boolean> payOrder(@RequestHeader("Authorization") String authorization, @RequestBody OrderDto orderDto) {
 
 		return ResponseEntity.ok(paymentService.payOrder(authorization.split(" ")[1], orderDto.getPaymentToken()));
+	}
+
+	@PostMapping("/update-source")
+	@RolesAllowed(USER)
+	public ResponseEntity<String> updateSource(@RequestBody OrderDto orderDto) throws IOException {
+
+		return ResponseEntity.ok(paymentService.updateSourceCurrency(orderDto.getId(), orderDto.getSourceCurrencyCode()));
 	}
 }

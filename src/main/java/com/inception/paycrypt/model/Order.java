@@ -31,6 +31,16 @@ public class Order {
 	private String id;
 
 	/**
+	 * Source account
+	 */
+	private String sourceAccount;
+
+	/**
+	 * Target account
+	 */
+	private String targetAccount;
+
+	/**
 	 * Target currency of order
 	 */
 	private CurrencyCode targetCurrencyCode;
@@ -80,6 +90,8 @@ public class Order {
 	 */
 	public Order(OrderDto orderDto) {
 
+		this.sourceAccount = orderDto.getSourceAccount();
+		this.targetAccount = orderDto.getTargetAccount();
 		this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
 		this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
 		this.targetValue = orderDto.getTargetValue();
@@ -96,9 +108,8 @@ public class Order {
 	 */
 	public void update(OrderDto orderDto) {
 
-		this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
+		this.sourceAccount = orderDto.getSourceAccount();
 		this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
-		this.targetValue = orderDto.getTargetValue();
 		this.sourceValue = orderDto.getSourceValue();
 		this.paymentMethodId = orderDto.getPaymentMethodId();
 		this.orderState = orderDto.getOrderState();
@@ -110,9 +121,9 @@ public class Order {
 	 */
 	public void updateTarget(final OrderDto orderDto) {
 
+		this.targetAccount = orderDto.getTargetAccount();
 		this.targetCurrencyCode = orderDto.getTargetCurrencyCode();
 		this.targetValue = orderDto.getTargetValue();
-
 	}
 
 	/**
@@ -120,8 +131,9 @@ public class Order {
 	 */
 	public void updateSource(final OrderDto orderDto) {
 
+		this.sourceAccount = orderDto.getSourceAccount();
 		this.sourceCurrencyCode = orderDto.getSourceCurrencyCode();
-
+		this.sourceValue = orderDto.getSourceValue();
 	}
 
 }

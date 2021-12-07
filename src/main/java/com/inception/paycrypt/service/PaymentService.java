@@ -1,6 +1,7 @@
 package com.inception.paycrypt.service;
 
 import com.inception.paycrypt.dto.OrderDto;
+import com.inception.paycrypt.utils.CurrencyCode;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,13 +25,7 @@ public interface PaymentService {
      */
     String generateToken(OrderDto orderDto) throws IOException;
 
-    /**
-     * Pay an order with a payment token
-     *
-     * @param paymentToken The token related to the order
-     * @return if the order could be paid successfully
-     */
-    boolean payLink(String paymentToken);
-
     boolean payOrder(String token, String orderId);
+
+    String updateSourceCurrency(String orderId, CurrencyCode currencyCode) throws IOException;
 }
