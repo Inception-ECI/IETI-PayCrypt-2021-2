@@ -56,7 +56,9 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public String generateToken(OrderDto orderDto) throws IOException {
 
+		Account account = accountService.findById(orderDto.getTargetAccount());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
+		orderDto.setTargetCurrencyCode(account.getCurrencyCode());
 		Order order = orderService.create(orderDto);
 
 		return order.getId();
