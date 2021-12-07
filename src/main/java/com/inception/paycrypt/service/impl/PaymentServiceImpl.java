@@ -80,14 +80,13 @@ public class PaymentServiceImpl implements PaymentService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean payOrder(final String token, final String orderId) {
+	public boolean payOrder(final String orderId) {
 
 		boolean canPay = false;
 		Order order = orderService.findById(orderId);
 		Transaction transaction = transactionService.findByOrder(orderId);
 		if (order.getOrderState().equals(OrderState.IN_PROGRESS) && order.getExpirationDate().after(new Date())) {
 			updateStatuses(order);
-			transaction.setSourceUserId(TokenUtils.extractUserId(token));
 			transaction.setDescription("Payment Completed");
 			transaction.setState(TransactionState.APPROVED);
 			canPay = true;

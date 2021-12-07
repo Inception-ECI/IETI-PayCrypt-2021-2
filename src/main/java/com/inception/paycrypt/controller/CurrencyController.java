@@ -9,10 +9,13 @@ import com.inception.paycrypt.model.Currency;
 import com.inception.paycrypt.service.CurrencyService;
 import com.inception.paycrypt.service.UserService;
 import com.inception.paycrypt.utils.CurrencyCode;
+import com.inception.paycrypt.utils.CurrencyUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Currency Controller
@@ -74,4 +77,8 @@ public class CurrencyController {
 		return ResponseEntity.ok(true);
 	}
 
+	@GetMapping("/currencies")
+	public ResponseEntity<List<CurrencyCode>> getNonCryptoCurrencies() {
+		return ResponseEntity.ok(CurrencyUtils.getNonCryptoCurrencies());
+	}
 }

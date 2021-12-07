@@ -25,7 +25,7 @@ public interface PaymentService {
      */
     String generateToken(String authorization, OrderDto orderDto) throws IOException;
 
-    boolean payOrder(String token, String orderId);
+    boolean payOrder(String orderId);
 
     String updateSourceCurrency(String orderId, CurrencyCode currencyCode) throws IOException;
 }
