@@ -94,7 +94,6 @@ public class OrderController {
 	 * @return update to sourceCurrency
 	 */
 	@PutMapping("/source/{orderId}")
-	@RolesAllowed(USER)
 	public ResponseEntity<Order> updateSourceValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) throws IOException {
 
 		return ResponseEntity.ok(orderService.updateSourceValue(orderId, orderDto));

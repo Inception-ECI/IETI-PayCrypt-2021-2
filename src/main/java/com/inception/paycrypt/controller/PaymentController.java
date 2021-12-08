@@ -50,7 +50,6 @@ public class PaymentController {
 	}
 
 	@PostMapping("/update-source")
-	@RolesAllowed(USER)
 	public ResponseEntity<String> updateSource(@RequestBody OrderDto orderDto) throws IOException {
 
 		return ResponseEntity.ok(paymentService.updateSourceCurrency(orderDto.getId(), orderDto.getSourceCurrencyCode()));
