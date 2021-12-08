@@ -44,10 +44,9 @@ public class PaymentController {
 	}
 
 	@PostMapping("/pay")
-	@RolesAllowed(USER)
-	public ResponseEntity<Boolean> payOrder(@RequestHeader("Authorization") String authorization, @RequestBody OrderDto orderDto) {
+	public ResponseEntity<Boolean> payOrder(@RequestBody OrderDto orderDto) {
 
-		return ResponseEntity.ok(paymentService.payOrder(authorization.split(" ")[1], orderDto.getPaymentToken()));
+		return ResponseEntity.ok(paymentService.payOrder(orderDto.getPaymentToken()));
 	}
 
 	@PostMapping("/update-source")
