@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/health")
+@CrossOrigin(origins = "*")
 public class HealthController {
 
 	/**

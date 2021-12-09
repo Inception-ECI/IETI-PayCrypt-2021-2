@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/user")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 

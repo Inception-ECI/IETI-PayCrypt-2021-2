@@ -1,5 +1,6 @@
 package com.inception.paycrypt.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.inception.paycrypt.exception.OrderServiceException;
@@ -33,6 +34,19 @@ public class TransactionServiceMongoDB implements TransactionService {
 			return optionalTransaction.get();
 		}
 
-		throw new UserServiceException(OrderServiceException.ORDER_TRANSACTION_NOT_FOUND);
+		throw new OrderServiceException(OrderServiceException.ORDER_TRANSACTION_NOT_FOUND);
 	}
+
+	@Override
+	public List<Transaction> getAllTransactionsByUserid(String sourceUserId) {
+		Optional<List<Transaction>> optionalTransactions = transactionRepository.findAllBySourceUserIdOrTargetUserId(sourceUserId, sourceUserId);
+
+		if (optionalTransactions.isPresent()) {
+
+			return optionalTransactions.get();
+		}
+
+		throw new OrderServiceException(OrderServiceException.ORDER_TRANSACTION_NOT_FOUND);
+	}
+
 }

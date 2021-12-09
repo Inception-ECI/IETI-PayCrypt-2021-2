@@ -21,6 +21,7 @@ import static com.inception.paycrypt.utils.UserRoles.ADMIN;
 @CrossOrigin(originPatterns = "*", origins = "*")
 @RestController()
 @RequestMapping("/v1/paymentMethod")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PaymentMethodController {
 

@@ -1,6 +1,7 @@
 package com.inception.paycrypt.model;
 
 import com.inception.paycrypt.dto.TransactionDto;
+import com.inception.paycrypt.utils.CurrencyCode;
 import com.inception.paycrypt.utils.TransactionState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
