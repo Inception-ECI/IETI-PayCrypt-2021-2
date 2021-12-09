@@ -18,6 +18,6 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
 
     Optional<Transaction> findByOrderId(String orderId);
 
-    Optional<List<Transaction>> findAllBySourceUserId(String sourceUserId);
+    Optional<List<Transaction>> findAllBySourceUserIdOrTargetUserId(String sourceUserId, String targetUserId);
 
 }

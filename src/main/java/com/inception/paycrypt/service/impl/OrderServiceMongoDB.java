@@ -17,6 +17,7 @@ import com.inception.paycrypt.service.OrderService;
 import com.inception.paycrypt.utils.CurrencyCode;
 import com.inception.paycrypt.utils.OrderState;
 import com.inception.paycrypt.utils.TokenUtils;
+import com.inception.paycrypt.utils.TransactionState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,11 +68,11 @@ public class OrderServiceMongoDB implements OrderService {
 		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
 		orderDto.setExpirationDate(calendar.getTime());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
-		orderDto.setSourceValue(conversionCurrency(orderDto));
 		Order order = orderRepository.save(new Order(orderDto));
 		transactionService.create(Transaction.builder()
 						 .orderId(order.getId())
 						 .creationDate(new Date())
+						 .state(TransactionState.IN_PROGRESS)
 						 .targetUserId(TokenUtils.extractUserId(token))
 						 .build());
 		return order;
@@ -84,7 +85,6 @@ public class OrderServiceMongoDB implements OrderService {
 		calendar.add(Calendar.MINUTE, DEFAULT_ORDER_EXPIRATION_MINUTE);
 		orderDto.setExpirationDate(calendar.getTime());
 		orderDto.setOrderState(OrderState.IN_PROGRESS);
-		orderDto.setSourceValue(conversionCurrency(orderDto));
 		Order order = orderRepository.save(new Order(orderDto));
 
 		return order;

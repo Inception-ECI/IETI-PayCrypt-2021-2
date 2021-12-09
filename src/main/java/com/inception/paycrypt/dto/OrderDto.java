@@ -26,6 +26,16 @@ public class OrderDto {
     private String id;
 
     /**
+     * Source account
+     */
+    private String sourceAccount;
+
+    /**
+     * Target account
+     */
+    private String targetAccount;
+
+    /**
      * Target currency of order
      */
     private CurrencyCode targetCurrencyCode;

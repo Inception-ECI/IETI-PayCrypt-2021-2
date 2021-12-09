@@ -38,27 +38,20 @@ public class PaymentController {
 	 * @throws IOException When can't convert between currencies
 	 */
 	@PostMapping("/link")
-	public ResponseEntity<String> createPaymentLink(@RequestBody OrderDto orderDto) throws IOException {
+	public ResponseEntity<String> createPaymentLink(@RequestBody OrderDto orderDto, @RequestHeader("Authorization") String authorization) throws IOException {
 
-		return ResponseEntity.ok(paymentService.generateToken(orderDto));
-	}
-
-	/**
-	 * Endpoint to pay an order
-	 *
-	 * @param orderDto The token of the order to pay
-	 * @return if the order was paid successfully
-	 */
-	@PostMapping("/link/pay")
-	public ResponseEntity<Boolean> payLink(@RequestBody OrderDto orderDto) {
-
-		return ResponseEntity.ok(paymentService.payLink(orderDto.getPaymentToken()));
+		return ResponseEntity.ok(paymentService.generateToken(authorization.split(" ")[1], orderDto));
 	}
 
 	@PostMapping("/pay")
-	@RolesAllowed(USER)
-	public ResponseEntity<Boolean> payOrder(@RequestHeader("Authorization") String authorization, @RequestBody OrderDto orderDto) {
+	public ResponseEntity<Boolean> payOrder(@RequestBody OrderDto orderDto) {
 
-		return ResponseEntity.ok(paymentService.payOrder(authorization.split(" ")[1], orderDto.getPaymentToken()));
+		return ResponseEntity.ok(paymentService.payOrder(orderDto.getPaymentToken()));
+	}
+
+	@PostMapping("/update-source")
+	public ResponseEntity<String> updateSource(@RequestBody OrderDto orderDto) throws IOException {
+
+		return ResponseEntity.ok(paymentService.updateSourceCurrency(orderDto.getId(), orderDto.getSourceCurrencyCode()));
 	}
 }
