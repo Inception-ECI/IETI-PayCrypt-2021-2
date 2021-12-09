@@ -9,10 +9,10 @@ import com.inception.paycrypt.dto.OrderDto;
 import com.inception.paycrypt.dto.RequestConversionDto;
 import com.inception.paycrypt.exception.OrderServiceException;
 import com.inception.paycrypt.exception.UserServiceException;
-import com.inception.paycrypt.model.Order;
-import com.inception.paycrypt.model.PaymentMethod;
-import com.inception.paycrypt.model.Transaction;
+import com.inception.paycrypt.model.*;
+import com.inception.paycrypt.repository.AccountRepository;
 import com.inception.paycrypt.repository.OrderRepository;
+import com.inception.paycrypt.repository.UserRepository;
 import com.inception.paycrypt.service.OrderService;
 import com.inception.paycrypt.utils.CurrencyCode;
 import com.inception.paycrypt.utils.OrderState;
@@ -42,6 +42,16 @@ public class OrderServiceMongoDB implements OrderService {
 	 * The {@link OrderRepository}
 	 */
 	private final OrderRepository orderRepository;
+
+	/**
+	 * The {@link AccountRepository}
+	 */
+	private final AccountRepository accountRepository;
+
+	/**
+	 * The {@link UserRepository}
+	 */
+	private final UserRepository userRepository;
 
 	/**
 	 * The {@link ConversionServiceImpl} to convert currencies
@@ -178,6 +188,27 @@ public class OrderServiceMongoDB implements OrderService {
 			orderRepository.save(order);
 
 			return order;
+		}
+
+		throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);
+	}
+
+	@Override
+	public User getUserByAccountId(String accountId) throws IOException {
+
+		Optional<Account> optionalAccount = accountRepository.findById(accountId);
+
+		if (optionalAccount.isPresent()) {
+
+			Optional<User> optionalUser = userRepository.findById(optionalAccount.get().getUserId());
+
+			if (optionalUser.isPresent()) {
+
+				User user = optionalUser.get();
+				user.setPassword("");
+
+				return user;
+			}
 		}
 
 		throw new OrderServiceException(OrderServiceException.ORDER_NOT_FOUND);

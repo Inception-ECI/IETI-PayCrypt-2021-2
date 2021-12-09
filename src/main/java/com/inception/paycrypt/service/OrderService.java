@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import com.inception.paycrypt.dto.OrderDto;
 import com.inception.paycrypt.model.Order;
+import com.inception.paycrypt.model.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -73,5 +74,7 @@ public interface OrderService {
 	 * @return
 	 */
 	Order updateSourceValue(String orderId, OrderDto orderDto) throws IOException;
+
+	User getUserByAccountId(String accountId) throws IOException;
 
 }

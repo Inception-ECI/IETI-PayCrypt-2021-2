@@ -2,6 +2,7 @@ package com.inception.paycrypt.controller;
 
 import com.inception.paycrypt.dto.OrderDto;
 import com.inception.paycrypt.model.Order;
+import com.inception.paycrypt.model.User;
 import com.inception.paycrypt.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +97,12 @@ public class OrderController {
     public ResponseEntity<Order> updateSourceValue(@RequestBody OrderDto orderDto, @PathVariable String orderId) throws IOException {
 
         return ResponseEntity.ok(orderService.updateSourceValue(orderId, orderDto));
+    }
+
+    @GetMapping("/user/{accountId}")
+    public ResponseEntity<User> getUserByAccountId(@PathVariable String accountId) throws IOException {
+
+        return ResponseEntity.ok(orderService.getUserByAccountId(accountId));
     }
 
 }
