@@ -23,7 +23,6 @@ import java.util.List;
  * @version 1.0.0
  * @since 1.0.0
  */
-@CrossOrigin(originPatterns = "*", origins = "*")
 @RestController
 @RequestMapping("/v1/account")
 @CrossOrigin(origins = "*")
